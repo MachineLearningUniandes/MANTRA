@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2011)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: MAIN.aux
+The style file: mnras.bst
+Database file #1: bibliography.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--can't use both author and editor fields in 1104.3142
+Warning--empty publisher in 1104.3142
+You've used 26 entries,
+            2881 wiz_defined-function locations,
+            913 strings with 17365 characters,
+and the built_in function-call counts, 12056 in all, are:
+= -- 955
+> -- 864
+< -- 41
++ -- 398
+- -- 115
+* -- 1571
+:= -- 1848
+add.period$ -- 0
+call.type$ -- 26
+change.case$ -- 52
+chr.to.int$ -- 26
+cite$ -- 28
+duplicate$ -- 601
+empty$ -- 633
+format.name$ -- 203
+if$ -- 2066
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 28
+newline$ -- 93
+num.names$ -- 162
+pop$ -- 149
+preamble$ -- 1
+purify$ -- 104
+quote$ -- 0
+skip$ -- 343
+stack$ -- 0
+substring$ -- 653
+swap$ -- 302
+text.length$ -- 108
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 228
+warning$ -- 2
+while$ -- 179
+width$ -- 0
+write$ -- 276
+(There were 2 warnings)
