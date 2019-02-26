@@ -1,5 +1,5 @@
 LATEX = pdflatex
-MAIN  = MAIN
+MAIN  = main
 
 all: $(MAIN).pdf
 
@@ -23,7 +23,7 @@ tar :
 
 
 clean:
-	rm -f $(MAIN).pdf $(MAIN).out $(MAIN).bbl $(MAIN).aux $(MAIN)_diff.pdf $(MAIN).log
+	rm -f $(MAIN).pdf $(MAIN).out $(MAIN).bbl $(MAIN).aux $(MAIN)_diff.pdf $(MAIN).blg $(MAIN).log 
 
 view: 
 	open $(MAIN).pdf &
