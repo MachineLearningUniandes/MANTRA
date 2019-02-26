@@ -104,13 +104,15 @@ $^{2}$Departamento de F\'isica, Universidad de los Andes, Cra. 1 No. 18A-10, Bog
 % Abstract of the paper
 \begin{abstract}
 
-We introduce an annotated dataset of more than $10000$ transient and non-transient
-object light-curves built from the Catalina Real Time Transient Survey.
+We introduce ATRANCCATA (Annotated TRANsient Catalina CATAlog) an
+annotated dataset of more than $10000$ transient and non-transient
+object light-curves built from the Catalina Real Time Transient
+Survey. 
 This dataset provides a baseline to facilitate standarized
 quantitative comparison of astronomical transient event recognition
 algorithms.    
 The classes included in the dataset are: supernovae, cataclismic
-variable, active galactic nuclei, high proper motion stars, blazars
+variableS, active galactic nuclei, high proper motion stars, blazars
 and flares.
 As an example on how to use the dataset we experiment with multiple
 data pre-processing methods, feature selection techniques and classic
@@ -120,8 +122,8 @@ We assess quantitative performance in two classification tasks:
 binary (transient/non-transient) and eight-class classification.   
 The best performing algorithm is a Random Forest Classifier for both
 classification experiments.  
-The next release of this reference database will include images and
-benchmarks with deep learning models.
+The next release of ATRANCCA will include images and benchmarks with
+deep learning models. 
 All our code and data is available to the community at
 \url{https://github.com/MachineLearningUniandes/AstroTransientReference}.
 \end{abstract}
@@ -138,25 +140,19 @@ methods: data analysis, statistical
 %%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
 
 \section{Introduction}
-%\import{./chapters/}{1.intro.tex}
-% All papers should start with an Introduction section, which sets the work
-% in context, cites relevant earlier studies in the field by \citet{Others2013},
-% and describes the problem the authors aim to solve \citep[e.g.][]{Author2012}.
 
-%%% NEW MULTI EPOCH SURVEYS ENABLE STUDY AND DETECTION IN CRAZY SCALES
 The study and detection of astronomical variable sources is expected
 to occur on unprecedented scales with the new generation of
 forthcoming multi-epoch and multi-band (synoptic) astronomical
 surveys. 
 For instance, projects like the Large Synoptic Survey Telescope
 (LSST)  \citep{0805.2366,1512.07914} are expected to generate
-exuberant daily data-streams.   
-
+exuberant daily data-streams near to 20 petabytes every night.   
 
 One of the main challenges that these datasets want to address is
 Real-Time Transient classification, i.e. flagging astrophysically
 relevant events whose luminosity varies in short duration relative in
-the timescale of the universe, from minutes to several years.  
+the timescale of the Universe, from minutes to several years.  
 Transients include phenomena such as supernovae, novae, neutron
 stars, blazars, pulsars, cataclysmic variable stars (CV), gamma ray
 bursts (GRB) and active galaxy nuclei (AGN). 
@@ -165,7 +161,7 @@ they are hard to classify: their data is usually heterogeneous,
 unbalanced, sparse, unevenly sampled and with missing information. 
 This has motived the use of Machine Learning (ML) algorithms to recognize
 and classify transient events. 
-%%% STATE OF THE ART I: REAL VS BOGUS
+
 
 There have been successful attempts to implement these algorithms
 using images as an input.
@@ -216,19 +212,17 @@ In this paper we present light-curve data, in a future publication we
 will present an imaging dataset. 
 
 In Section \ref{sec:data} we present the CRTS and the steps we follow
-to build the curated dataset. 
-In Section \ref{sec:repository} we describe the main features of the
-dataset and the repository structure gathering the files and code
-useful to explore it. 
+to build the dataset.
+In Section \ref{sec:repository} we describe its main features together
+with the repository structure gathering the files and some Python code  
+to explore it.
 In Section \ref{sec:ml_tests} we show how this dataset can be used to
-perform some tests using some classical ML tests. 
-We follow a similar approach as \cite{1601.03931}. 
+perform some tests using some classical ML tests follow a similar
+approach as \cite{1601.03931}.  
 We finalize in Section \ref{sec:conclusions} with a summary of main
 features of our dataset and the results of our ML tests.
 
 \section{The lightcurve dataset} \label{section_data}
-%\import{./chapters/}{2.data.tex}
-%%% Overview
 
 
 \begin{figure*}
