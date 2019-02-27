@@ -105,9 +105,9 @@ $^{2}$Departamento de F\'isica, Universidad de los Andes, Cra. 1 No. 18A-10, Bog
 \begin{abstract}
 
 We introduce ATRANCCATA (Annotated TRANsient Catalina CATAlog) an
-annotated dataset of more than $10000$ transient and non-transient
+annotated dataset of $4869$ transient and $16940$ non-transient
 object light-curves built from the Catalina Real Time Transient
-Survey. 
+Survey.  
 This dataset provides a baseline to facilitate standarized
 quantitative comparison of astronomical transient event recognition
 algorithms.    
@@ -125,7 +125,7 @@ classification experiments.
 The next release of ATRANCCA will include images and benchmarks with
 deep learning models. 
 All our code and data is available to the community at
-\url{https://github.com/MachineLearningUniandes/AstroTransientReference}.
+\url{https://github.com/MachineLearningUniandes/ATRANCCATA}.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -274,14 +274,9 @@ We obtain the lightcuves from the transient dataset directly from
 the CRTS project. 
 To compile the non-transient dataset we retrieve sources in the
 dataset from the CRTS online catalogue, by sampling light curves of
-objects within a 0.006  degree radius from CRTS detected transients, and removing known
-transient light curves from that set. 
+objects within a 0.006  degree radius from CRTS detected transients,
+and removing known transient light curves from that set. 
 Our dataset includes all lightcurves with at least one observation. 
-
-Table \ref{Transient-Observation-Count} and
-Table \ref{Non-Transient-Observation-Count} summarize some statistics
-on the number of observations available for each light curve for the
-transient and non-transient datasets, respectively.  
 
 
 % Number of transients per transient class
@@ -309,97 +304,101 @@ transient and non-transient datasets, respectively.
 
 \section{Repository Description} \label{section_code}
 
-The repository that contains the lightcurves and some code to process
+The repository that contains the light-curves and some code to process
 the data can be found in
-\url{https://github.com/MachineLearningUniandes/AstroTransientReference}.
-For
-this project we used various python libraries: \texttt{jupyter}
-(1.0.0), \texttt{numpy} (1.14.3), \texttt{pandas} (0.22.0) and
-\texttt{scikit-learn} (0.19.1). Details other dependencies can be
-found in the included file \texttt{requirements.txt}. 
+\url{https://github.com/MachineLearningUniandes/ATRANCCATA}. 
 
 The repository has three main folders
 
 \begin{itemize}
+
 \item \texttt{data}: Contains all the lightcurves and labels. 
-  This directory is itself split data into three: 
+  \begin{itemize}
+  \item \texttt{lightcurves}: raw light-curves as csv files.
+  \end{itemize}
+
+\item \texttt{nb-explore}: jupyter notebooks with examples of simple
+  light-curve exploration.
+
+\item{\texttt{ML}}: Contains the data sets and notebooks to perform the ML
+  tests. It is divided into three different directories:
 \begin{itemize}
-\item \texttt{lightcurves}: raw light-curves as csv files.
+\item \texttt{notebooks}. Contains all the code for the ML tests. 
+  There are three numbered jupyter notebooks summarizing our
+  experimental framework.  
+  The documentation is included into each notebook.
+  There are various \texttt{.py} files with the required python
+  routines. 
 \item \texttt{features}:  resulting features of pre-processing the
-light-curves, for both transients and non-transients. 
+light curves for both transients and non-transients. 
 \item \texttt{inputs} data-set split into training/test for the
   different machine learning classification tasks. 
-It splits the data into different meta-parameters:
-classification task, number of features, minimum number of
-observations, and balanced/unbalanced data. Each one of the input
-files contains a numpy tuple with the structure: \textit{(train
-  features, train labels, test features, test labels)} 
-\end{itemize}
-\item \texttt{notebooks}. Contains all the code for the ML tests. 
-There are three numbered jupyter notebooks summarizing our experimental framework. 
-The documentation is included into each notebook.
-There are various \texttt{.py} files with the python routines used by
-the  notebooks. 
-\item \texttt{results}. Contains the products of the ML code. 
+  Data is split into different meta-parameters:
+  classification task, number of features, minimum number of
+  observations, and balanced/unbalanced data. 
+  Each one of the input files contains a numpy tuple with the
+  structure: \textit{(train features, train labels, test features,
+    test labels)}  
+\item \texttt{results}. Products of the ML test. 
   One result type is named dataframes, which contains a pandas
-  dataframe for each task. Each dataframe contains the testing and
+  dataframe for each task. 
+  Each dataframe contains the testing and
   training results, including scores and confusion matrices.  
   On the other hand, the results sub-folder contains the feature
   importance list figures presented in this document.  
 \end{itemize}
+\end{itemize}
 
 
-The tables \ref{Transient-Observation-Count} and
-\ref{Non-Transient-Observation-Count} in this annex contain
-statistical descriptors of the light curves' observation count, for
-transient and non-transient curves that contain at least 5
-observations. 
-Table \ref{Transient-Observation-Count} makes reference to transient
-events, whereas table \ref{Non-Transient-Observation-Count} refers to
-non-transient objects.  
-Each of these tables present the mean, standard deviation, percentiles
-(25, 50 and 75) and maximum number of observations per light curve
-found in each dataset. 
 
-% Number of transients per transient class
-\begin{table}
-\centering
-\begin{tabular}{c|c}
-    \hline
-    Count & 4269 \\
-    \hline
-    Mean & 102.810 \\
-    Std & 113.786 \\
-    Min & 5 \\
-    25\% & 14 \\
-    50\% & 48 \\
-    75\% & 166 \\
-    Max & 564 \\
-    \hline
-\end{tabular}
-\caption{Transient's data-set observation count per object.}
-\label{Transient-Observation-Count}
-\end{table}
+
+%The tables \ref{Transient-Observation-Count} and
+%\ref{Non-Transient-Observation-Count} summarize the 
+%number of light curves of  transient and non-transient sources, respectively, that
+%contain at least 5 observations. 
+%Each of these tables present the mean, standard deviation, percentiles
+%(25, 50 and 75) and maximum number of observations per light curve
+%found in each dataset. 
 
 % Number of transients per transient class
-\begin{table}
-\centering
-\begin{tabular}{c|c}
-    \hline
-    Count & 15193 \\
-    \hline
-    Mean & 118.37 \\
-    Std & 116.51 \\
-    Min & 5 \\
-    25\% & 26 \\
-    50\% & 72 \\
-    75\% & 185 \\
-    Max & 537 \\
-    \hline
-\end{tabular}
-\caption{Non-Transient's data-set observation count per object.}
-\label{Non-Transient-Observation-Count}
-\end{table}
+%\begin{table}
+%\centering
+%\begin{tabular}{c|c}
+%    \hline
+%    Count & 4269 \\
+%    \hline
+%    Mean & 102.810 \\
+%    Std & 113.786 \\
+%    Min & 5 \\
+%    25\% & 14 \\
+%    50\% & 48 \\
+%    75\% & 166 \\
+%    Max & 564 \\
+%    \hline
+%\end{tabular}
+%\caption{Transient's data-set observation count per object.}
+%\label{Transient-Observation-Count}
+%\end{table}
+
+% Number of transients per transient class
+%\begin{table}
+%\centering
+%\begin{tabular}{c|c}
+%    \hline
+%    Count & 15193 \\
+%    \hline
+%    Mean & 118.37 \\
+%    Std & 116.51 \\
+%    Min & 5 \\
+%    25\% & 26 \\
+%    50\% & 72 \\
+%    75\% & 185 \\
+%    Max & 537 \\
+%    \hline
+%\end{tabular}
+%\caption{Non-Transient's data-set observation count per object.}
+%\label{Non-Transient-Observation-Count}
+%\end{table}
 
 
 
