@@ -104,13 +104,13 @@ $^{2}$Departamento de F\'isica, Universidad de los Andes, Cra. 1 No. 18A-10, Bog
 % Abstract of the paper
 \begin{abstract}
 
-We introduce ATRANCCATA (Annotated TRANsient Catalina CATAlog) an
+We introduce ATRANCCA (Annotated TRANsient Catalina CAlog) an
 annotated dataset of $4869$ transient and $16940$ non-transient
 object light-curves built from the Catalina Real Time Transient
-Survey.  
-This dataset provides a baseline to facilitate standarized
-quantitative comparison of astronomical transient event recognition
-algorithms.    
+Survey.
+We provide access to this dataset as a baseline to facilitate
+standarized quantitative comparison of astronomical transient event
+recognition algorithms. 
 The classes included in the dataset are: supernovae, cataclismic
 variableS, active galactic nuclei, high proper motion stars, blazars
 and flares.
@@ -224,23 +224,6 @@ features of our dataset and the results of our ML tests.
 
 \section{The lightcurve dataset} \label{section_data}
 
-
-\begin{figure*}
-  \includegraphics[width=0.8\textwidth]{examples.pdf}
-  \caption{Randomly selected lightcurves for the most represented classes as
-    compiled in the database we present in this paper.}  
-  \label{fig:examples}
-\end{figure*} 
-
-\begin{figure}
-  \includegraphics[width=0.45\textwidth]{cumulative_classes.pdf}
-  \caption{Cumulative number of data curves (expressed as a fraction)
-    sampled with at least $N$ data points. This includes information
-    for the three most representative classes (SN, CV, AGN) and the
-    whole database (ALL).}
-  \label{fig:cumulative}
-\end{figure} 
-
 We use public data from the Catalina Real-Time Transient Survey
 (CRTS) \citep{1111.2566}, an astronomical survey searching transient
 and highly variable objects.   
@@ -286,21 +269,25 @@ Our dataset includes all lightcurves with at least one observation.
     \hline
     Class &  Object Count \\
     \hline
-    SN & 1293 \\
-    CV & 862 \\
-    AGN & 425 \\
-    HPM & 306 \\
-    Blazar & 237 \\
-    SN? & 236 \\
-    Flare & 207 \\
-    AGN? & 130 \\
-    Unknown & 114 \\
-    CV? & 55 \\
+SN & 1723 \\
+CV & 988 \\
+HPM & 640 \\
+AGN & 446 \\
+SN? & 319 \\
+Blazar & 243 \\
+Unknown & 228 \\
+Flare & 219 \\
+AGN? & 138 \\
+CV? & 77 \\
     \hline
 \end{tabular}
-\caption{Top 10 transient classes, with their respective event count.}
+\caption{Top 10 transient classes, with their respective number of
+  light-curves.} 
 \label{Top-Transient-Classes}
 \end{table}
+
+
+
 
 \section{Repository Description} \label{section_code}
 
@@ -348,6 +335,34 @@ light curves for both transients and non-transients.
   importance list figures presented in this document.  
 \end{itemize}
 \end{itemize}
+
+
+\begin{figure*}
+	\includegraphics[width=0.45\textwidth]{cumulative_magnitude.pdf}
+  \includegraphics[width=0.45\textwidth]{cumulative_classes.pdf}
+  \caption{Cumulative number of light curves (expressed as a fraction)
+    as a function of average magnitude (left) and number of data
+    points in the light curve (right).
+    This includes information for the three most representative
+    classes (SN, CV, AGN) and the whole database (ALL).}
+  \label{fig:cumulative}
+\end{figure*} 
+
+
+
+\begin{figure*}
+  \includegraphics[width=0.8\textwidth]{examples_transient.pdf}
+  \caption{Randomly selected lightcurves for the most represented classes as
+    compiled in the database we present in this paper.}  
+  \label{fig:examples_transient}
+\end{figure*} 
+
+
+\begin{figure*}
+  \includegraphics[width=0.8\textwidth]{examples_nontransient.pdf}
+  \caption{Randomly selected lightcurves for non-transient sources.}
+  \label{fig:examples_non_transient}
+\end{figure*} 
 
 
 
