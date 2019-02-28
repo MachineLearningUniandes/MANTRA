@@ -39,17 +39,9 @@
 \usepackage[T1]{fontenc}
 \usepackage{ae,aecompl}
 
-
-
-%%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
-
-% Only include extra packages if you really need them. Common packages are:
 \usepackage{graphicx}	% Including figure files
 \usepackage{amsmath}	% Advanced maths commands
 \usepackage{amssymb}	% Extra maths symbols
-
-% \usepackage{multicol}        % Multi-column entries in tables
-% \usepackage{bm}		% Bold maths symbols, including upright Greek
 \usepackage{pdflscape}	% Landscape pages
 \usepackage[utf8]{inputenc}
 \usepackage{multirow}
@@ -93,7 +85,7 @@ $^{2}$Departamento de F\'isica, Universidad de los Andes, Cra. 1 No. 18A-10, Bog
 \date{Accepted XXX. Received YYY; in original form ZZZ}
 
 % Enter the current year, for the copyright statements etc.
-\pubyear{2018}
+\pubyear{2019}
 
 % Don't change these lines
 \begin{document}
@@ -104,15 +96,15 @@ $^{2}$Departamento de F\'isica, Universidad de los Andes, Cra. 1 No. 18A-10, Bog
 % Abstract of the paper
 \begin{abstract}
 
-We introduce ATRANCCA (Annotated TRANsient Catalina CAlog) an
+We introduce ATRANCCA (Annotated TRANsient Catalina CAtalog) an
 annotated dataset of $4869$ transient and $16940$ non-transient
 object light-curves built from the Catalina Real Time Transient
 Survey.
-We provide access to this dataset as a baseline to facilitate
+We provide access to this dataset as a plain text file to facilitate
 standarized quantitative comparison of astronomical transient event
 recognition algorithms. 
 The classes included in the dataset are: supernovae, cataclismic
-variableS, active galactic nuclei, high proper motion stars, blazars
+variables, active galactic nuclei, high proper motion stars, blazars
 and flares.
 As an example on how to use the dataset we experiment with multiple
 data pre-processing methods, feature selection techniques and classic
@@ -125,7 +117,7 @@ classification experiments.
 The next release of ATRANCCA will include images and benchmarks with
 deep learning models. 
 All our code and data is available to the community at
-\url{https://github.com/MachineLearningUniandes/ATRANCCATA}.
+\url{https://github.com/MachineLearningUniandes/ATRANCCA}.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -225,7 +217,7 @@ features of our dataset and the results of our ML tests.
 \section{The lightcurve dataset} \label{section_data}
 
 We use public data from the Catalina Real-Time Transient Survey
-(CRTS) \citep{1111.2566}, an astronomical survey searching transient
+(CRTS) \citep{2009ApJ...696..870D}, an astronomical survey searching transient
 and highly variable objects.   
 It covered 33000 squared degrees of sky and took data since 2007.
 Three telescopes were used: Mt. Lemmon Survey (MLS), Catalina Sky
@@ -236,12 +228,14 @@ an f/1.8 Schmidt telescope located in the Santa Catalina Mountains, north of Tuc
 Arizona and is equipped with a 111-megapixel  detector, and covered
 4000 square degrees per night, with a limiting magnitude of 19.5 in
 the V band.  
-The public CRTS data base reports the source magnitudes and its
-corresponding uncertainty \citep{1996PASP..108..851S}.
+Details about the observations, data reduction and transient
+detection can be found in \cite{2009ApJ...696..870D}
+The public CRTS data base (\url{http://crts.caltech.edu/}) reports the
+source magnitudes and its corresponding uncertainty. 
 
 
 The CRTS dataset already provides a classification. 
-The most relevant classes are: supernovae (SN),
+The most numerous classes are: supernovae (SN),
 cataclysmic variable stars (CV), blazars, flares, asteroids, active
 galactic nuclei (AGN), and high-proper-motion stars (HPM). 
 Though most objects in the transient object catalogue belong to a single class,
@@ -253,14 +247,12 @@ event e.g. SN/CV.
 Table \ref{Top-Transient-Classes} summarizes the number of objects in
 each class. 
 
-We obtain the lightcuves from the transient dataset directly from
-the CRTS project. 
+The lightcurves were directly provided from the CRTS project.
 To compile the non-transient dataset we retrieve sources in the
-dataset from the CRTS online catalogue, by sampling light curves of
+dataset from the CRTS online catalogue by sampling light curves of
 objects within a 0.006  degree radius from CRTS detected transients,
 and removing known transient light curves from that set. 
 Our dataset includes all lightcurves with at least one observation. 
-
 
 % Number of transients per transient class
 \begin{table}
@@ -283,7 +275,7 @@ CV? & 77 \\
 \end{tabular}
 \caption{Top 10 transient classes, with their respective number of
   light-curves.} 
-\label{Top-Transient-Classes}
+\label{table:top_clases}
 \end{table}
 
 
@@ -299,14 +291,21 @@ The repository has three main folders
 
 \begin{itemize}
 
-\item \texttt{data}: Contains all the lightcurves and labels. 
-  \begin{itemize}
-  \item \texttt{lightcurves}: raw light-curves as csv files.
-  \end{itemize}
-
-\item \texttt{nb-explore}: jupyter notebooks with examples of simple
-  light-curve exploration.
-
+\item \texttt{data/lightcurves}: 
+Contains three text files in CSV format
+the transient light curves (\texttt{transient\_lightcurves.csv}),
+the labels for the transients (\texttt{transient\_labels.csv}) and
+the light curves for non-transient objects
+(\texttt{nontransient\_lightcurves.csv}). 
+The first two files can be linked by unique transient IDs and
+provided in the CRTS database. 
+\item \texttt{nb-explore}: includes a jupyter notebook
+  (\texttt{explore\_light\_curves.ipynb}) with examples on how to read
+  and plot transient and non-transient light curves (Figure
+  \ref{fig:examples_transient} and Figure
+  \ref{fig:examples_non_transient}), extract the statistic in Table
+  \ref{table:top_classes} and prepare the summary statistics in Figure
+  \ref{fig:cumulative}. 
 \item{\texttt{ML}}: Contains the data sets and notebooks to perform the ML
   tests. It is divided into three different directories:
 \begin{itemize}
@@ -778,15 +777,14 @@ Non-Transient &  57  &   6  &  4  &  8  &  2   & 18  &  29 & 3027 \\ \hline
 The scope of forthcoming of large astronomical synoptic surveys 
 motivates the development and exploration of automatized ways to
 detect transient sources. 
-Such an effort requires the compilation of publicly available
-databases to train and test new algorithms.
-In this paper we present the results of such compilation based on data
+In turn this prompts the compilation of publicly available databases
+to train and test new algorithms. 
+In this paper we presented the results of such compilation based on data
 from the Catalina Real-Time Transient Suvey (CRTS).
-The data-set we presented in this paper summarizes more than 10000
-light curves for six different classes of transients.
+The data-set compiles  $4869$ transient and $16940$ non-transient
+light-curves. 
 The dataset is publicly available at
-\url{https://github.com/MachineLearningUniandes/AstroTransientReference}.   
-
+\url{https://github.com/MachineLearningUniandes/ATRANCCA}.   
 
 We illustrated how to use this database by extracting 
 characteristic features to use them as inputs to train three different
