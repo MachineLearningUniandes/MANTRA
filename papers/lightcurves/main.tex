@@ -349,86 +349,66 @@ provided in the CRTS database.
 \section{Classical Machine Learning Tests} \label{section_method}
 
 As an example on how the dataset can be used, we apply classical
-machine learning algorithms to perform different classification tasks.
+machine learning (ML)algorithms to perform different classification tasks.
 
-
-\subsection{Data Preprocessing}
 We do not feed directly the anotated lightcurves to the ML algorithms.
-There is preprocessing stage that follows six steps.
-
-\subsubsection{Data Filtering} \label{subsection_filtering}
-
-We discard light curves with few observations as they may not contain
-enough information to be classified correctly
-Our nominal cut is 10 observations per light curve.
+We perform some preprocessing as follows.
+First, we discard light curves with less than 10 data points
+observations as they may not contain enough information to be
+classified correctly.
 
 
-\subsubsection{Oversampling Transient Light Curves} \label{subsection_oversampling}
-
-The number of light curves per class is unbalanced. 
-In order to have the same amount elements for each class we implement an
+Given that the number of light curves per class is unbalanced, 
+in order to have the same amount elements for each class we implement an
 oversampling step by artificially generating multiple mock light curves,
 each based on an observed one. 
-
 We generate a mock light curve from the observed light curve and 
 then sample the observed magnitude from a Gaussian distribution
 centered on the observational apparent magnitude with the magnitude's
 error as the standard deviation. 
+At the end of this process we renormalize the magnitudes in the light
+curves to have zero mean and unit variance.  
 
-
-\subsubsection{Feature Extraction} \label{subsection_extraction}
-
-Light curves are sampled at irregular time intervals and have
-different numbers of data points.
-Thus, it is challenging to directly use the time-series data for
-classification with traditional methods.
-We circumvent this problem by extracting a set of features for each
-light curve.
+Finally, we compute a fixed set of features for each light curve. 
 These features are scalars derive from statistical and model-specific
 fitting techniques. 
 The first features (moment-based, magnitude-based and
 percentile-based) were formally introduced in 
 \cite{1101.1959}, and have been used in other studies \citep{1603.00882,1601.03931}.  
-We extend that list to include another set (polynomial fitting-based features. 
-These groups are:
+We extend that list to include another set (polynomial fitting-based features). 
+
+These groups of features are:
 
 \begin{enumerate}
     
 \item Moment-based features, which use the magnitude for each light curve.
   \begin{itemize}
-  \item \underline{Beyond1std} (\textit{beyond1std}): 
+  \item \texttt{beyond1std}: 
     Percentage of observations which are over or under one standard
     deviation from the weighted average. Each weight is calculated as
     the inverse of the corresponding observation's photometric error. 
-        \item \underline{Kurtosis} (\textit{kurtosis}): 
-        The fourth moment of the data distribution. Used to measure
-        the heaviness or lightness in the tails of the statistical
-        data. 
-        \item \underline{Skewness} (\textit{skew}): 
-        A measurement of the level of asymmetry from the normal
-        distribution in a data distribution. Negative skewness is the
-        property of a more pronounced left tail, while positive
-        skewness is a characteristic that implies a more pronounced
-        right tail. 
-        \item \underline{Small Kurtosis} (\textit{sk}):
-        Small sample kurtosis.
-        \item \underline{Standard deviation} (\textit{std}):
-        The standard deviation of the magnitudes.
-        \item \underline{Stetson J} (\textit{stetson\textunderscore j}):
-        The Welch-Stetson J variability index
-        \cite{1996PASP..108..851S}. A robust standard deviation. 
-        \item \underline{Stetson K} (\textit{stetson\textunderscore k}): 
-        The Welch-Stetson K variability index
-        \cite{1996PASP..108..851S}. A robust kurtosis measure. 
-    \end{itemize}
-    
-    \item Magnitude-based features, which rely on the magnitude for each source.
+  \item \texttt{kurtosis}: 
+    The fourth moment of the data distribution. 
+  \item \texttt{skew}: 
+    Skewness. Third moment of the data distribution.
+  \item \texttt{sk}:
+    Small sample kurtosis.
+  \item \texttt{std}::
+    The standard deviation.
+  \item \texttt{stetson\_j}:
+    The Welch-Stetson J variability index
+    \citep{1996PASP..108..851S}. A robust standard deviation. 
+  \item \texttt{stetson\_k}:  The Welch-Stetson K variability index
+    \citep{1996PASP..108..851S}. A robust kurtosis measure. 
+  \end{itemize}
+  
+\item Features based on the magnitudes.
     \begin{itemize}
-    \item \underline{Amplitude} (\textit{amp}): 
+    \item \texttt{amp}: 
       The difference between the maximum and minimum magnitudes.
-    \item \underline{Max Slope} (\textit{max\textunderscore slope}): 
+    \item \texttt{max\_slope}: 
       Maximum absolute slope between two consecutive observations.
-    \item \underline{Median Absolute Deviation} (\textit{mad}): 
+    \item \texttt{mad}: 
       The median of the difference between magnitudes and the median
       magnitude. 
     \item \underline{Median Buffer Range Percentage} (\textit{mbrp}): 
@@ -481,7 +461,7 @@ These groups are:
 
 \subsubsection{Feature Scaling} \label{subsection_scaling}
 
-We re-scale the magnitudes to have zero mean  and unit variance. 
+
 
 
 \subsection{Classification Tasks} \label{subsection_classification}
