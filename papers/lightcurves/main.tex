@@ -353,6 +353,9 @@ provided in the CRTS database.
 As an example on how the dataset can be used, we apply classical
 machine learning (ML)algorithms to perform different classification tasks.
 
+
+\subsection{Features}
+
 We do not feed directly the anotated lightcurves to the ML algorithms.
 We perform some preprocessing as follows.
 First, we discard light curves with less than 10 data points
@@ -574,10 +577,10 @@ These results imply that non-transients are better classified overall.
 
 Figure \ref{Importances-Binary} displays the most important features
 for the RFs classifier.
-The top five inputs for classification are stetson\textunderscore j,
-std, mad, poly1\textunderscore t1 and poly2\textunderscore t1.  
-The former achieved the highest importance with over 21\%, compared to
-the following with values in the range 6\% - 8\%. 
+The top five inputs for classification are \texttt{stetson\_j},
+\texttt{std}, \texttt{mad}, \texttt{poly1\_t1} and \texttt{poly2\_t1}.  
+The first feature achieved the highest importance of 21\%, compared to
+the following with values in the range 6\% - 8\%.  
 
 
 \begin{table}
@@ -610,15 +613,14 @@ transient                    & 223       & 844   \\ \hline
 \subsubsection{Eight-Class Classification}
 
 
-RFs are the best classifier. 
+For this task RFs are againt the best classifier.  
 The best f1-score is 66.05\%. 
 NNs are the second best. 
 Its highest f1-score is 60.19\%, while SVMs are the worst-performing
 model only achieving a maximum f1-score of 57.30\%.
-Table \ref{Classifier-Scores-8-Class-10} summarizes the results. 
+Table \ref{Overall-Scores-8-Class-Regular} summarizes the results
+and Table \ref{Confusion-8-Class} presents the confusion matrix for the RF.
 
-
-Table \ref{Confusion-8-Class} presents the confusion matrix for the RF.
 The two classes with highest recall are HPM and Non-Transient, with a
 recall of 86.36\% and 84.13\%, respectively. 
 The worst performing classes are Blazar, Flare and Other, with recall
@@ -633,13 +635,10 @@ Additionally, most incorrectly classified AGNs ($\sim$20.5\%) are
 identified as Other and most Blazar instances are
 incorrectly categorized as either SN or AGN. 
 
-
 Figure \ref{Importances-8-Class} displays the feature importance ranking.
-This list ranks first stetson\textunderscore j with an 8\% importance,
-followed by amp, sk, std, mad, with values around 6\%. 
-The lowest raking features are the five high level polynomial: poly4\textunderscore
-t1,  poly4\textunderscore t2, poly3\textunderscore t3,
-poly4\textunderscore t3 and poly4\textunderscore t4. 
+This list ranks first \texttt{stetson\_j} with an 8\% importance,
+followed by \texttt{amp}, \texttt{sk}, \texttt{std}, \texttt{mad},
+with values around 6\%.  
 
 
 \begin{table}
@@ -654,18 +653,18 @@ HPM           &   25.19 &   86.84  &  39.05  &   76 \\ \hline
 Blazar        &   46.77 &   49.15  &  47.93  &   59 \\ \hline
 Flare         &    7.00 &   41.17  &  11.96  &   51 \\ \hline
 Other         &   31.11 &   44.01  &  36.46  &  234 \\ \hline
-Non-transient &   96.06 &   79.69  &  87.12  & 3798 \\ \hline
+NT &   96.06 &   79.69  &  87.12  & 3798 \\ \hline
 avg/total     &   46.25 &   63.59  &  50.38  & 4862 \\ \hline
 \end{tabular}
 \caption{Precision, Recall and f1-score for the 8-Class Classification Task with Regular inputs.}
 \label{Overall-Scores-8-Class-Regular}
 \end{table}
 
-\begin{table*}
+\begin{table}
 \centering
 \begin{tabular}{|r|c|c|c|c|c|c|c|c|}
 \hline
-\multicolumn{1}{|l|}{} & SN    & CV    & AGN   & HPM   & Blazar   & Flare   & Other   & Non-Transient  \\ \hline \hline
+\multicolumn{1}{|l|}{} & SN    & CV    & AGN   & HPM   & Blazar   & Flare   & Other   & NT  \\ \hline \hline
 SN            & 166  &  25  &  0  &  0  &  7   &  5  &  40 &   97 \\ \hline
 CV            &  17  & 152  &  0  &  1  &  5   &  3  &  12 &   37 \\ \hline
 AGN           &   1  &   2  & 91  &  0  & 10   &  1  &  35 &   49 \\ \hline
@@ -673,11 +672,11 @@ HPM           &   5  &   0  &  0  & 66  &  0   &  0  &   5 &  186 \\ \hline
 Blazar        &   8  &  13  &  4  &  0  & 29   &  0  &   6 &    2 \\ \hline
 Flare         &  16  &   5  &  0  &  0  &  3   & 21  &   4 &  251 \\ \hline
 Other         &  53  &  12  &  7  &  1  &  3   &  3  & 103 &  149 \\ \hline
-Non-Transient &  57  &   6  &  4  &  8  &  2   & 18  &  29 & 3027 \\ \hline
+NT &  57  &   6  &  4  &  8  &  2   & 18  &  29 & 3027 \\ \hline
 \end{tabular}
 \caption{Confusion Matrix for the best performing model in the 8-Class task.}
 \label{Confusion-8-Class}
-\end{table*}
+\end{table}
 
 
 
@@ -693,7 +692,7 @@ from the Catalina Real-Time Transient Suvey (CRTS).
 The data-set compiles  $4869$ transient and $16940$ non-transient
 light-curves. 
 The dataset is publicly available at
-\url{https://github.com/MachineLearningUniandes/ATRANCCA}.   
+\url{https://github.com/MachineLearningUniandes/ATRANCCATA}.   
 
 We illustrated how to use this database by extracting 
 characteristic features to use them as inputs to train three different
