@@ -214,7 +214,8 @@ approach as \cite{1601.03931}.
 We finalize in Section \ref{sec:conclusions} with a summary of main
 features of our dataset and the results of our ML tests.
 
-\section{The lightcurve dataset} \label{section_data}
+\section{The lightcurve dataset} 
+\label{sec:data}
 
 We use public data from the Catalina Real-Time Transient Survey
 (CRTS) \citep{2009ApJ...696..870D}, an astronomical survey searching transient
@@ -316,7 +317,8 @@ The number of points in the light curve has a larger variability.
 The median for all the curves is close to 30, while for SN, CV and
 AGN it is close to 15, 50 and 180, respectively.
 
-\section{Repository Description} \label{section_code}
+\section{Repository Description} 
+\label{sec:repository}
 
 The repository that contains the light-curves and a jupyter notebook
 to reproduce some of the Figures and Tables in this paper.
@@ -348,7 +350,8 @@ provided in the CRTS database.
 
 
 
-\section{Classical Machine Learning Tests} \label{section_method}
+\section{Classical Machine Learning Tests} 
+\label{sec:ml_tests}
 
 As an example on how the dataset can be used, we apply classical
 machine learning (ML)algorithms to perform different classification tasks.
@@ -512,7 +515,7 @@ following.
 \item Random Forest:
 \begin{itemize}
     \item Number of Estimators: $200$ or $700$.
-    \item Number of features Considered: Square Root or the Logarithm 
+    \item Number of features considered: Square Root or the Logarithm 
     base 2 of the total number of features.
 \end{itemize}
 
@@ -650,10 +653,10 @@ SN            &   48.82 &   51.39  &  50.07  &  323 \\ \hline
 CV            &   66.96 &   70.69  &  68.77  &  215 \\ \hline
 AGN           &   48.14 &   85.84  &  61.69  &  106 \\ \hline
 HPM           &   25.19 &   86.84  &  39.05  &   76 \\ \hline
-Blazar        &   46.77 &   49.15  &  47.93  &   59 \\ \hline
-Flare         &    7.00 &   41.17  &  11.96  &   51 \\ \hline
-Other         &   31.11 &   44.01  &  36.46  &  234 \\ \hline
-NT &   96.06 &   79.69  &  87.12  & 3798 \\ \hline
+Blazar (Bl)       &   46.77 &   49.15  &  47.93  &   59 \\ \hline
+Flare (Fl)      &    7.00 &   41.17  &  11.96  &   51 \\ \hline
+Other (O)        &   31.11 &   44.01  &  36.46  &  234 \\ \hline
+Non-Transient (NT)&   96.06 &   79.69  &  87.12  & 3798 \\ \hline
 avg/total     &   46.25 &   63.59  &  50.38  & 4862 \\ \hline
 \end{tabular}
 \caption{Precision, Recall and f1-score for the 8-Class Classification Task with Regular inputs.}
@@ -664,23 +667,28 @@ avg/total     &   46.25 &   63.59  &  50.38  & 4862 \\ \hline
 \centering
 \begin{tabular}{|r|c|c|c|c|c|c|c|c|}
 \hline
-\multicolumn{1}{|l|}{} & SN    & CV    & AGN   & HPM   & Blazar   & Flare   & Other   & NT  \\ \hline \hline
+\multicolumn{1}{|l|}{} & \rotatebox{90}{SN}    & \rotatebox{90}{CV}
+& \rotatebox{90}{AGN}   & \rotatebox{90}{HPM}    &
+\rotatebox{90}{Blazar}  & \rotatebox{90}{Flare}  &
+\rotatebox{90}{Other}   & \rotatebox{90}{Non-Transient}  \\ \hline \hline
 SN            & 166  &  25  &  0  &  0  &  7   &  5  &  40 &   97 \\ \hline
 CV            &  17  & 152  &  0  &  1  &  5   &  3  &  12 &   37 \\ \hline
 AGN           &   1  &   2  & 91  &  0  & 10   &  1  &  35 &   49 \\ \hline
 HPM           &   5  &   0  &  0  & 66  &  0   &  0  &   5 &  186 \\ \hline
-Blazar        &   8  &  13  &  4  &  0  & 29   &  0  &   6 &    2 \\ \hline
-Flare         &  16  &   5  &  0  &  0  &  3   & 21  &   4 &  251 \\ \hline
-Other         &  53  &  12  &  7  &  1  &  3   &  3  & 103 &  149 \\ \hline
-NT &  57  &   6  &  4  &  8  &  2   & 18  &  29 & 3027 \\ \hline
+Blazar       &   8  &  13  &  4  &  0  & 29   &  0  &   6 &    2 \\ \hline
+Flare        &  16  &   5  &  0  &  0  &  3   & 21  &   4 &  251 \\ \hline
+Other        &  53  &  12  &  7  &  1  &  3   &  3  & 103 &  149 \\ \hline
+Non-Tr. &  57  &   6  &  4  &  8  &  2   & 18  &  29 & 3027 \\ \hline
 \end{tabular}
-\caption{Confusion Matrix for the best performing model in the 8-Class task.}
+\caption{Confusion Matrix for the best performing model in the 8-Class
+  task. The classes follow the abbreviations in Table \ref{Overall-Scores-8-Class-Regular}}
 \label{Confusion-8-Class}
 \end{table}
 
 
 
 \section{Conclusions}
+\label{sec:conclusions}
 
 The scope of forthcoming of large astronomical synoptic surveys 
 motivates the development and exploration of automatized ways to
@@ -702,11 +710,13 @@ The features extracted from light curves were either statistical
 descriptors of the observations, or polynomial curve fitting
 coefficients applied to the light curves.   
 Overall the best classifier for all tasks was the Random Forest.
-In this model the most important feature was always stetson$\_$j.
+In this model the most important feature was always
+\texttt{stetson$\_$j}, i.e. a robust estimate for the standard
+deviation. 
 
 In a second paper we will present another reference dataset for
 astronomical transient event recognition based on images of the
-CATALINA survey. 
+CRTS.
 The corresponding tests will use  state-of-the art deep learning
 techniques for transient classification. 
 
