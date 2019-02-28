@@ -278,6 +278,34 @@ CV? & 77 \\
 \label{table:top_classes}
 \end{table}
 
+
+\begin{figure*}
+	\includegraphics[width=0.45\textwidth]{cumulative_magnitude.pdf}
+  \includegraphics[width=0.45\textwidth]{cumulative_classes.pdf}
+  \caption{Cumulative number of light curves (expressed as a fraction)
+    as a function of average magnitude (left) and number of data
+    points in the light curve (right).
+    This includes information for the three most representative
+    classes (SN, CV, AGN) and the whole database (ALL).}
+  \label{fig:cumulative}
+\end{figure*} 
+
+
+
+\begin{figure*}
+  \includegraphics[width=0.6\textwidth]{examples_transient.pdf}
+  \caption{Randomly selected lightcurves for the most represented classes as
+    compiled in the database we present in this paper.}  
+  \label{fig:examples_transient}
+\end{figure*} 
+
+
+\begin{figure*}
+  \includegraphics[width=0.6\textwidth]{examples_nontransient.pdf}
+  \caption{Randomly selected lightcurves for non-transient sources.}
+  \label{fig:examples_non_transient}
+\end{figure*} 
+
 Figure \ref{fig:cumulative} shows the number of light curves as a
 function of average magnitude (left panel) and as a function of the
 number of points in the light curve.
@@ -319,32 +347,6 @@ provided in the CRTS database.
 \end{itemize}
 
 
-\begin{figure*}
-	\includegraphics[width=0.45\textwidth]{cumulative_magnitude.pdf}
-  \includegraphics[width=0.45\textwidth]{cumulative_classes.pdf}
-  \caption{Cumulative number of light curves (expressed as a fraction)
-    as a function of average magnitude (left) and number of data
-    points in the light curve (right).
-    This includes information for the three most representative
-    classes (SN, CV, AGN) and the whole database (ALL).}
-  \label{fig:cumulative}
-\end{figure*} 
-
-
-
-\begin{figure*}
-  \includegraphics[width=0.8\textwidth]{examples_transient.pdf}
-  \caption{Randomly selected lightcurves for the most represented classes as
-    compiled in the database we present in this paper.}  
-  \label{fig:examples_transient}
-\end{figure*} 
-
-
-\begin{figure*}
-  \includegraphics[width=0.8\textwidth]{examples_nontransient.pdf}
-  \caption{Randomly selected lightcurves for non-transient sources.}
-  \label{fig:examples_non_transient}
-\end{figure*} 
 
 \section{Classical Machine Learning Tests} \label{section_method}
 
@@ -411,13 +413,15 @@ These groups of features are:
     \item \texttt{mad}: 
       The median of the difference between magnitudes and the median
       magnitude. 
-    \item \underline{Median Buffer Range Percentage} (\textit{mbrp}): 
+    \item \texttt{mbrp}: 
       The percentage of points within 10\% of the median magnitude.
-    \item \underline{Pair Slope Trend} (\textit{pst}): 
+    \item \texttt{pst}: 
       Percentage of all pairs of consecutive magnitude measurements that have positive slope.
-    \item \underline{Pair Slope Trend 30} (\textit{pst\textunderscore last30}): 
-      Percentage of the last 30 pairs of consecutive magnitudes that have a positive slope, minus percentage of the last 30 pairs of consecutive magnitudes with a negative slope.
-    \end{itemize}
+    \item \texttt{pst\_last30}: 
+      Percentage of the last 30 pairs of consecutive magnitudes that
+      have a positive slope, minus percentage of the last 30 pairs of
+      consecutive magnitudes with a negative slope. 
+    \end{itemize} 
 
 
   \item Percentile-based features, which use the sorted flux distribution for
@@ -425,60 +429,56 @@ These groups of features are:
     We define $F_{n,m}$ as the difference between the $m$-th and $n$-the flux
     percentiles. 
     \begin{itemize}
-    \item \underline{Percent Amplitude} (\textit{p \textunderscore amp}): 
-      Largest percentage difference between the absolute maximum magnitude and the median.
-    \item \underline{Percent Difference Flux Percentile} (\textit{pdfp}): 
+    \item \texttt{p\_amp}: 
+      Largest percentage difference between the absolute maximum
+      magnitude and the median. 
+    \item \texttt{pdfp}: 
       Ratio between $F_{5,95}$ and the median flux.
-    \item \underline{Flux Percentile Ratio Mid20} (\textit{fpr20}): 
+    \item \texttt{fpr20}: 
       Ratio $F_{40,60} / F_{5,95}$
-    \item \underline{Flux Percentile Ratio Mid35} (\textit{fpr35}):
-        Ratio $F_{32.5,67.5} / F_{5,95}$
-      \item \underline{Flux Percentile Ratio Mid50} (\textit{fpr50}): 
-        Ratio $F_{25,75} / F_{5,95}$
-      \item \underline{Flux Percentile Ratio Mid65} (\textit{fpr65}): 
-        Ratio $F_{17.5,82.5} / F_{5,95}$
-      \item \underline{Flux Percentile Ratio Mid80} (\textit{fpr80}): 
-        Ratio $F_{10,90} / F_{5,95}$
+    \item \texttt{fpr35}:
+      Ratio $F_{32.5,67.5} / F_{5,95}$
+    \item \texttt{fpr50}: 
+      Ratio $F_{25,75} / F_{5,95}$
+    \item \texttt{fpr65}: 
+      Ratio $F_{17.5,82.5} / F_{5,95}$
+    \item \texttt{fpr80}: 
+      Ratio $F_{10,90} / F_{5,95}$
     \end{itemize}
     
   \item Polynomial Fitting-based features, which are the coefficients of
-    multi-level terms in a polynomial curve fitting. This is new set
+    multi-level terms in a polynomial curve fittingpr. This is a new set
     of features proposed in this paper. 
+    \texttt{Polyn\_Tm} indicates the coffecient of the term of order
+    \texttt{m} in a fit to a polinomial of order \texttt{n}.
     \begin{itemize}
-        \item \underline{Poly1 T1}: Linear term coeff. in monomial curve fitting.
-        \item \underline{Poly2 T1}: Linear term coeff. in quadratic curve fitting.
-        \item \underline{Poly2 T2}: Quadratic term coeff. in quadratic curve fitting.
-        \item \underline{Poly3 T1}: Linear term coeff. in cubic curve fitting.
-        \item \underline{Poly3 T2}: Quadratic term coeff. in cubic curve fitting.
-        \item \underline{Poly3 T3}: Cubic term coeff. in cubic curve fitting.
-        \item \underline{Poly4 T1}: Linear term coeff. in quartic curve fitting.
-        \item \underline{Poly4 T2}: Quadratic term coeff. in quartic curve fitting.
-        \item \underline{Poly4 T3}: Cubic term coeff. in quartic curve fitting.
-        \item \underline{Poly4 T4}: Quartic term coeff. in quartic curve fitting.
+        \item \texttt{Poly1\_T1}.
+        \item \texttt{Poly2\_T1}.
+        \item \texttt{Poly2\_T2}.
+        \item \texttt{Poly3\_T1}.
+        \item \texttt{Poly3\_T2}.
+        \item \texttt{Poly3\_T3}.
+        \item \texttt{Poly4\_T1}.
+        \item \texttt{Poly4\_T2}.
+        \item \texttt{Poly4\_T3}.
+        \item \texttt{Poly4\_T4}.
     \end{itemize}    
 \end{enumerate}
-
-
-\subsubsection{Feature Scaling} \label{subsection_scaling}
-
-
-
 
 \subsection{Classification Tasks} \label{subsection_classification}
 
 We study two classification tasks.
 
-\subsubsection{ Binary Classification}
-We use a balanced number of events from both classes in order 
+\begin{itemize}
+\item {Binary Classification}.
+Using a balanced number of events from both classes in order 
 to investigate the capability of distinguishing between Transients
 and Non-Transients.
-
-\subsubsection{8-Class Classification}
-
-We consider the unbalanced number of objects across classes to 
+\item{8-Class Classification}.
+Using the unbalanced number of objects across classes to 
 perform a classification into the following categories:
-AGN, Blazar, CV, Flare, HPM, Other, Non-Transient and Supernovae.   
-
+AGN, Blazar, CV, Flare, HPM, Other, Non-Transient and Supernovae.  
+\end{itemize}
 
 \subsection{ML algorithms}
 
@@ -492,35 +492,35 @@ for low dimensional feature datasets as is our case.
 We use sklearn \citep{1201.0490} Python's implementation of these algorithms.
 Details on the inner workings of these machine learning models can be
 found in \cite{9780387848570}.  
-
 The set of hyperparameter space explored for each algorithm is the
 following. 
 
-For Neural Networks:
 \begin{itemize}
-    \item Learning Rate: Either constant vs adaptive.
-    \item Hidden Layer Sizes: Single Layer with $100$ nodes vs Two layers with
-    $100$ nodes each.
-    \item L2 Penalty ($\alpha$): 
-      $10^{-1}$, $10^{-2}$, $10^{-3}$ , $10^{-4}$.
-    \item Activation Function: Logistic vs Relu.
+\item Neural Networks:
+\begin{itemize}
+\item Learning Rate: Either constant vs. adaptive.
+\item Hidden Layer Sizes: Single Layer with $100$ nodes vs. Two layers with
+  $100$ nodes each.
+\item L2 Penalty ($\alpha$): 
+  $10^{-1}$, $10^{-2}$, $10^{-3}$ , $10^{-4}$.
+\item Activation Function: Logistic vs. Relu.
 \end{itemize}
 
-For Random Forest:
+\item Random Forest:
 \begin{itemize}
     \item Number of Estimators: $200$ or $700$.
     \item Number of features Considered: Square Root or the Logarithm 
     base 2 of the total number of features.
 \end{itemize}
 
-For Support Vector Machines:
+\item Support Vector Machines:
 \begin{itemize}
     \item Kernel: Radial Basis Function (RBF).
     \item Kernel Coefficient ($\gamma$):  
       $10^{-1}$, $10^{-2}$, $10^{-3}$ , $10^{-4}$, $10^{-5}$
     \item Error Penalty (\textit{C}): 1 vs 10 vs 100 vs 1000. 
 \end{itemize}
-
+\end{itemize}
 
 \subsection{Validation} \label{subsection_importances}
 
@@ -534,7 +534,6 @@ hyper-parameter configurations for each one  of the possible
 algorithms. 
 We use the F1-Score to assess the performance of a given model and 
 we evaluate each task on the held-out test dataset.
-
 
 \begin{figure*}
 	\includegraphics[width=\textwidth]{binFeatImportance.pdf}
