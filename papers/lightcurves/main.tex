@@ -103,7 +103,7 @@ Survey.
 We provide access to this dataset as a plain text file to facilitate
 standarized quantitative comparison of astronomical transient event
 recognition algorithms. 
-The classes included in the dataset are: supernovae, cataclismic
+Some of the classes included in the dataset are: supernovae, cataclismic
 variables, active galactic nuclei, high proper motion stars, blazars
 and flares.
 As an example on how to use the dataset we experiment with multiple
@@ -220,38 +220,38 @@ features of our dataset and the results of our ML tests.
 We use public data from the Catalina Real-Time Transient Survey
 (CRTS) \citep{2009ApJ...696..870D}, an astronomical survey searching transient
 and highly variable objects.   
-It covered 33000 squared degrees of sky and took data since 2007.
+CRTS covered 33000 squared degrees of sky and took data since 2007.
 Three telescopes were used: Mt. Lemmon Survey (MLS), Catalina Sky
 Survey (CSS), and Siding Spring Survey (SSS). So far, CRTS has
 discovered more than $15000$ transient events.
-We use light curves as measured with the CSS telescope of the CRTS, which is
-an f/1.8 Schmidt telescope located in the Santa Catalina Mountains, north of Tucson,
-Arizona and is equipped with a 111-megapixel  detector, and covered
+We use data from the CSS telescope, which is an f/1.8 Schmidt
+telescope located in the Santa Catalina Mountains in Arizona.
+The telescope is equipped with a 111-megapixel  detector, and covered
 4000 square degrees per night, with a limiting magnitude of 19.5 in
 the V band.  
-Details about the observations, data reduction and transient
-detection can be found in \cite{2009ApJ...696..870D}
 
 Putting together the light curves for ATRANCCATA implies
-cross-matching different kinds of files  in the legacy CRTS database
-published as plain text files
+cross-matching different files in the legacy CRTS webpage
+published as here:
 \url{http://nesssi.cacr.caltech.edu/DataRelease/CRTS-I_transients.html}. 
+The photometry is stored in two different kind of files: \verb"phot"
+that come from the main photometry database and \verb"orphan" that
+correspond to transients not associated with the 500 million sources
+in the main photometry database.
+There are also \verb"out" files that must be used to link transient
+IDs to database IDs.
 
-This steps can be summarized as follows.
-First we construct from the archival webpage
-\url{http://nesssi.cacr.caltech.edu/catalina/All.arch.html} the table
-\verb"Table_A" with all the transients detected with the CSS
-telescope. \verb"Table_A" has basic information for 5540 transients.  
 
-Then, we use the \verb".out" files to link transients in
-\verb"Table_A" to the 
-
-to create \verb"Table_B" and link the transientes in \verb"Table_A"
-to find the corresponding database indexes, \texttt{"dbID"}, for each transient 
-The public release of \verb"Table_B" has basic information only for
-4280 transients.  
-
-With the \texttt"dbID" information we getha
+For each one of the 5540 transients reported and classified in the
+archival webpage \url{http://nesssi.cacr.caltech.edu/catalina/All.arch.html} we use its
+transient IDs and its database IDs to look for the lightcurves in the
+\texttt{phot} and \texttt{orphan} files. 
+Only 4982 transients can be linked to available data to reconstruct
+its light curves. 
+Furthermore, some of these lightcurves are duplicated, i.e. they had
+the same number of observations, MJD and magnitude measurement. 
+We drop the duplicates to end up with 4869 unique transients with an
+associated light curve.
 
 
 The CRTS dataset already provides a classification. 
@@ -267,12 +267,11 @@ event e.g. SN/CV.
 Table \ref{table:top_classes} summarizes the number of objects in
 each class. 
 
-The lightcurves were directly provided from the CRTS project.
-To compile the non-transient dataset we retrieve sources in the
-dataset from the CRTS online catalogue by sampling light curves of
-objects within a 0.006  degree radius from CRTS detected transients,
+To compile the non-transient light curves we retrieve sources in the
+dataset from the CRTS online catalogue by retrieving objects within a
+20 arcsecond radius from CRTS detected transients, 
 and removing known transient light curves from that set. 
-Our dataset includes all lightcurves with at least one observation. 
+We end up with 16940 unique non-transient light curves. 
 
 % Number of transients per transient class
 \begin{table}
@@ -373,7 +372,7 @@ provided in the CRTS database.
 \label{sec:ml_tests}
 
 As an example on how the dataset can be used, we apply classical
-machine learning (ML)algorithms to perform different classification tasks.
+machine learning (ML) algorithms to perform different classification tasks.
 
 
 \subsection{Features}
@@ -551,7 +550,7 @@ following.
 \subsection{Validation} \label{subsection_importances}
 
 We split the input light curves in a training and test datasets. 
-The test dataset contains only original light curves, without any
+The test dataset contains 4869 unique transients light curves and , without any
 oversampling. 
 We use 2-fold cross-validation during training as evaluation
 protocol. 
