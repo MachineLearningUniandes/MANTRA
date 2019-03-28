@@ -251,8 +251,13 @@ its light curves.
 Furthermore, some of these lightcurves are duplicated, i.e. they had
 the same number of observations, MJD and magnitude measurement. 
 We drop the duplicates to end up with 4869 unique transients with an
-associated light curve.
+associated light curve. Figure \ref{fig:transients} shows this process. 
 
+\begin{figure*}
+	\includegraphics[width=0.45\textwidth]{Transients.png}
+  \caption{ATRANCCATA Dataset Set Up: Light curve compilation for transients.}
+  \label{fig:transients}
+\end{figure*} 
 
 The CRTS dataset already provides a classification. 
 The most numerous classes are: supernovae (SN),
@@ -271,7 +276,13 @@ To compile the non-transient light curves we retrieve sources in the
 dataset from the CRTS online catalogue by retrieving objects within a
 20 arcsecond radius from CRTS detected transients, 
 and removing known transient light curves from that set. 
-We end up with 16940 unique non-transient light curves. 
+We end up with 16940 unique non-transient light curves. Figure \ref{fig:non-transients} shows this process. 
+
+\begin{figure*}
+	\includegraphics[width=0.45\textwidth]{NonTransients.png}
+  \caption{ATRANCCATA Dataset Set Up: Light curve compilation for non-transients.}
+  \label{fig:non-transients}
+\end{figure*} 
 
 % Number of transients per transient class
 \begin{table}
