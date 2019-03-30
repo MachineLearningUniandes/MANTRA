@@ -98,7 +98,7 @@ $^{3}$Departamento de F\'isica, Universidad de los Andes, Cra. 1 No. 18A-10, Bog
 
 We introduce ATRANCCATA (Annotated TRANsient Catalina CATAlog) an
 annotated dataset of $4869$ transient and $16940$ non-transient
-object light-curves built from the Catalina Real Time Transient
+object lightcurves built from the Catalina Real Time Transient
 Survey.
 We provide access to this dataset as a plain text file to facilitate
 standarized quantitative comparison of astronomical transient event
@@ -173,11 +173,11 @@ Surveys, and \cite{1407.4118} processed single-epoch multi-band images
 from the SDSS supernova survey for the same purpose.  
 
 
-A complementary approach uses the light curves computed from the
+A complementary approach uses the lightcurves computed from the
 images to perform the classification task.
 For instance \cite{1601.03931} used classical machine learning
 algorithms such as Random Forest, MultiLayer Perceptron and K-Nearest Neighbours
-light curves to classify transients from the Catalina Real Time
+lightcurves to classify transients from the Catalina Real Time
 Transient Survey; \cite{1603.00882} used the same approach to find
 where supernovas from the Supernova Photometric Classification
 Challenge.
@@ -198,7 +198,7 @@ transient detection.
 We use public data from the Catalina Real-Time Transient Survey
 (CRTS) \citep{1111.2566}, an astronomical survey searching transient
 and highly variable objects as base for the dataset.
-In this paper we present light-curve data, in a future publication we
+In this paper we present lightcurve data, in a future publication we
 will present an imaging dataset. 
 
 In Section \ref{sec:data} we present the CRTS and the steps we follow
@@ -228,7 +228,7 @@ The telescope is equipped with a 111-megapixel  detector, and covered
 4000 square degrees per night, with a limiting magnitude of 19.5 in
 the V band.  
 
-Putting together the light curves for ATRANCCATA implies
+Putting together the lightcurves for ATRANCCATA implies
 cross-matching different files in the legacy CRTS webpage
 published as here:
 \url{http://nesssi.cacr.caltech.edu/DataRelease/CRTS-I_transients.html}. 
@@ -245,15 +245,15 @@ archival webpage \url{http://nesssi.cacr.caltech.edu/catalina/All.arch.html} we 
 transient IDs and its database IDs to look for the lightcurves in the
 \texttt{phot} and \texttt{orphan} files. 
 Only 4982 transients can be linked to available data to reconstruct
-its light curves. 
+its lightcurves. 
 Furthermore, some of these lightcurves are duplicated, i.e. they had
 the same number of observations, MJD and magnitude measurement. 
 We drop the duplicates to end up with 4869 unique transients with an
-associated light curve. Figure \ref{fig:transients} shows this process. 
+associated lightcurve. Figure \ref{fig:transients} shows this process. 
 
 \begin{figure*}
-	\includegraphics[width=0.45\textwidth]{Transients.png}
-  \caption{ATRANCCATA Dataset Set Up: Light curve compilation for transients.}
+	\includegraphics[width=0.9\textwidth]{Transients.pdf}
+  \caption{ATRANCCATA Dataset Set Up: Lightcurve compilation for transients.}
   \label{fig:transients}
 \end{figure*} 
 
@@ -270,15 +270,15 @@ event e.g. SN/CV.
 Table \ref{table:top_classes} summarizes the number of objects in
 each class. 
 
-To compile the non-transient light curves we retrieve sources in the
+To compile the non-transient lightcurves we retrieve sources in the
 dataset from the CRTS online catalogue by retrieving objects within a
 20 arcsecond radius from CRTS detected transients, 
-and removing known transient light curves from that set. 
-We end up with 16940 unique non-transient light curves. Figure \ref{fig:non-transients} shows this process. 
+and removing known transient lightcurves from that set. 
+We end up with 16940 unique non-transient lightcurves. Figure \ref{fig:non-transients} shows this process. 
 
 \begin{figure*}
-	\includegraphics[width=0.45\textwidth]{NonTransients.png}
-  \caption{ATRANCCATA Dataset Set Up: Light curve compilation for non-transients.}
+	\includegraphics[width=0.7\textwidth]{NonTransients.pdf}
+  \caption{ATRANCCATA Dataset Set Up: Lightcurve compilation for non-transients.}
   \label{fig:non-transients}
 \end{figure*} 
 
@@ -302,7 +302,7 @@ CV? & 77 \\
     \hline
 \end{tabular}
 \caption{Top 10 transient classes, with their respective number of
-  light-curves.} 
+  lightcurves.} 
 \label{table:top_classes}
 \end{table}
 
@@ -310,9 +310,9 @@ CV? & 77 \\
 \begin{figure*}
 	\includegraphics[width=0.45\textwidth]{cumulative_magnitude.pdf}
   \includegraphics[width=0.45\textwidth]{cumulative_classes.pdf}
-  \caption{Cumulative number of light curves (expressed as a fraction)
+  \caption{Cumulative number of lightcurves (expressed as a fraction)
     as a function of average magnitude (left) and number of data
-    points in the light curve (right).
+    points in the lightcurve (right).
     This includes information for the three most representative
     classes (SN, CV, AGN) and the whole database (ALL).}
   \label{fig:cumulative}
@@ -334,20 +334,20 @@ CV? & 77 \\
   \label{fig:examples_non_transient}
 \end{figure*} 
 
-Figure \ref{fig:cumulative} shows the number of light curves as a
+Figure \ref{fig:cumulative} shows the number of lightcurves as a
 function of average magnitude (left panel) and as a function of the
-number of points in the light curve.
+number of points in the lightcurve.
 We show separately the whole data set and three representative
 classes: supernova (SN), cataclismic variables (CV) and active galactic nuclei (AGN).
 For these four sets the median magnitude is in the range $18-20$. 
-The number of points in the light curve has a larger variability.
+The number of points in the lightcurve has a larger variability.
 The median for all the curves is close to 30, while for SN, CV and
 AGN it is close to 15, 50 and 180, respectively.
 
 \section{Repository Description} 
 \label{sec:repository}
 
-The repository that contains the light-curves and a jupyter notebook
+The repository that contains the lightcurves and a jupyter notebook
 to reproduce some of the Figures and Tables in this paper.
 The repository can be found in \url{https://github.com/MachineLearningUniandes/ATRANCCATA}. 
 To date the repository has three main folders.
@@ -355,15 +355,15 @@ To date the repository has three main folders.
 
 \item \texttt{data/lightcurves}: 
 contains three text files in CSV format
-the transient light curves (\texttt{transient\_lightcurves.csv}),
+the transient lightcurves (\texttt{transient\_lightcurves.csv}),
 the labels for the transients (\texttt{transient\_labels.csv}) and
-the light curves for non-transient objects
+the lightcurves for non-transient objects
 (\texttt{nontransient\_lightcurves.csv}). 
 The first two files can be linked by unique transient IDs and
 provided in the CRTS database. 
 \item \texttt{nb-explore}: includes a jupyter notebook
   (\texttt{explore\_light\_curves.ipynb}) with examples on how to read
-  and plot transient and non-transient light curves (Figure
+  and plot transient and non-transient lightcurves (Figure
   \ref{fig:examples_transient} and Figure
   \ref{fig:examples_non_transient}), extract the statistic in Table
   \ref{table:top_classes} and prepare the summary statistics in Figure
@@ -381,29 +381,35 @@ provided in the CRTS database.
 \label{sec:ml_tests}
 
 As an example on how the dataset can be used, we apply classical
-machine learning (ML) algorithms to perform different classification tasks.
+machine learning (ML) algorithms to perform different classification tasks (Figure \ref{fig:ML}).
 
 
 \subsection{Features}
 
 We do not feed directly the anotated lightcurves to the ML algorithms.
 We perform some preprocessing as follows.
-First, we discard light curves with less than 10 data points
+First, we discard lightcurves with less than 10 data points
 observations as they may not contain enough information to be
 classified correctly.
 
+\begin{figure*}
+	\includegraphics[width=0.9\textwidth]{ML.pdf}
+  \caption{ATRANCCATA Machine Learning process.}
+  \label{fig:ML}
+\end{figure*} 
 
-Given that the number of light curves per class is unbalanced, 
+
+Given that the number of lightcurves per class is unbalanced, 
 in order to have the same amount elements for each class we implement an
-oversampling step by artificially generating multiple mock light curves,
+oversampling step by artificially generating multiple mock lightcurves,
 each based on an observed one. 
-We generate a mock light curve from the observed light curve and 
+We generate a mock lightcurve from the observed lightcurve and 
 then sample the observed magnitude from a Gaussian distribution
 centered on the observational apparent magnitude with the magnitude's
 error as the standard deviation. 
 
 
-Finally, we compute a fixed set of features for each light curve. 
+Finally, we compute a fixed set of features for each lightcurve. 
 These features are scalars derive from statistical and model-specific
 fitting techniques. 
 The first features (moment-based, magnitude-based and
@@ -417,7 +423,7 @@ These groups of features are:
 
 \begin{enumerate}
     
-\item Moment-based features, which use the magnitude for each light curve.
+\item Moment-based features, which use the magnitude for each lightcurve.
   \begin{itemize}
   \item \texttt{beyond1std}: 
     Percentage of observations which are over or under one standard
@@ -558,8 +564,8 @@ following.
 
 \subsection{Validation} \label{subsection_importances}
 
-We split the input light curves in a training and test datasets. 
-The test dataset contains 4869 unique transients light curves and , without any
+We split the input lightcurves in a training and test datasets. 
+The test dataset contains 4869 unique transients lightcurves and , without any
 oversampling. 
 We use 2-fold cross-validation during training as evaluation
 protocol. 
@@ -726,7 +732,7 @@ to train and test new algorithms.
 In this paper we presented the results of such compilation based on data
 from the Catalina Real-Time Transient Suvey (CRTS).
 The data-set compiles  $4869$ transient and $16940$ non-transient
-light-curves. 
+lightcurves. 
 The dataset is publicly available at
 \url{https://github.com/MachineLearningUniandes/ATRANCCATA}.   
 
@@ -734,9 +740,9 @@ We illustrated how to use this database by extracting
 characteristic features to use them as inputs to train three different
 machine learning algorithms (Random Forests, Neural Networks and
 Support Vector Machines) for classification tasks.
-The features extracted from light curves were either statistical
+The features extracted from lightcurves were either statistical
 descriptors of the observations, or polynomial curve fitting
-coefficients applied to the light curves.   
+coefficients applied to the lightcurves.   
 Overall the best classifier for all tasks was the Random Forest.
 In this model the most important feature was always
 \texttt{stetson$\_$j}, i.e. a robust estimate for the standard
