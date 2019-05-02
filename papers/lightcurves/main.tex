@@ -21,7 +21,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Basic setup. Most papers should leave these options alone.
-\documentclass[a4paper,fleqn,usenatbib]{mnras}
+\documentclass[usenatbib]{mnras}
 
 % MNRAS is set in Times font. If you don't have this installed (most LaTeX
 % installations will be fine) or prefer the old Computer Modern fonts, comment
@@ -37,14 +37,14 @@
 % Use vector fonts, so it zooms properly in on-screen viewing software
 % Don't change these lines unless you know what you are doing
 \usepackage[T1]{fontenc}
-\usepackage{ae,aecompl}
+
 
 \usepackage{graphicx}	% Including figure files
 \usepackage{amsmath}	% Advanced maths commands
 \usepackage{amssymb}	% Extra maths symbols
 \usepackage{pdflscape}	% Landscape pages
 \usepackage[utf8]{inputenc}
-\usepackage{multirow}
+
 \usepackage{float} % here for H placement parameter
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -62,8 +62,8 @@
 % Title of the paper, and the short title which is used in the headers.
 % Keep the title short and informative.
 \title[A reference transient dataset I: lightcurves]{A reference
-  dataset for astronomical transient event recognition I: lightcurves
-  and tests on classical machine learning algorithms}
+  dataset for astronomical transient event recognition I: lightcurves}
+
 
 
 % The list of authors, and the short list which is used in the headers.
@@ -96,8 +96,7 @@ $^{3}$Departamento de F\'isica, Universidad de los Andes, Cra. 1 No. 18A-10, Bog
 
 % Abstract of the paper
 \begin{abstract}
-
-We introduce ATRANCCATA (Annotated TRANsient Catalina CATAlog) an
+We introduce ATTAC (Annotated Transient caTAlina Catalog) an
 annotated dataset of $4869$ transient and $16940$ non-transient
 object lightcurves built from the Catalina Real Time Transient
 Survey.
@@ -115,10 +114,8 @@ We assess quantitative performance in two classification tasks:
 binary (transient/non-transient) and eight-class classification.   
 The best performing algorithm is a Random Forest Classifier for both
 classification experiments.  
-The next release of ATRANCCATA will include images and benchmarks with
+The next release of ATTAC will include images and benchmarks with
 deep learning models. 
-All our code and data is available to the community at
-\url{https://github.com/MachineLearningUniandes/ATRANCCATA}.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -134,74 +131,56 @@ methods: data analysis, statistical
 
 \section{Introduction}
 
-The study and detection of astronomical variable sources is expected
-to occur at unprecedented scales with the new generation of
-forthcoming multi-epoch and multi-band (synoptic) astronomical
-surveys. 
-For instance, projects like the Large Synoptic Survey Telescope
-(LSST)  \citep{0805.2366,1512.07914} are expected to generate
-exuberant daily data-streams of about 20 petabytes every night.  
-
-One of the main challenges that these datasets want to address is
-Real-Time Transient classification \citep{2004SPIE.5489...11K,2009PASP..121.1395L,2014ApJ...788...48S,2018PASP..130f4505T,2019PASP..131a8002B} including phenomena such
-as supernovae (SN), novae, neutron 
-stars, blazars, pulsars, cataclysmic variable stars (CV), gamma ray 
-bursts (GRB) and active galaxy nuclei (AGN). 
-The time-domain dependency of these objects is one of the reasons why 
-they are hard to classify: their data is usually heterogeneous, 
-unbalanced, sparse, unevenly sampled and with missing information. 
-These challenges have motivated the use of Machine Learning (ML) algorithms to recognize and classify transient events. 
 
 
+Large scale automatic detection and classification of astronomical
+transient is happens internally to surveys such as Pan-STARRS1
+\citep{2004SPIE.5489...11K}, the Palomar Transient Factory
+\citep{2009PASP..121.1395L},  the Catalina Real-Time Transient Survey
+\citep{2009ApJ...696..870D}, the All-Sky Automated Survey for
+SuperNovae \citep{2014ApJ...788...48S}, the Zwicky Transient
+Factory \citep{2019PASP..131a8002B}.
+Besides the sheear amount of data, astronomical transients
+classification is hard because the data is usually heterogeneous,
+unbalanced, sparse, unevenly sampled and with missing information.   
 
-There have been successful attempts to implement these algorithms
-using images as input. 
-For instance, data from the SkyMapper Supernova and Transient 
-Survey and the High cadence Transient Survey (HiTS) have been used as 
-input to automatic detection algorithms \citep{1708.08947,1701.00458}. 
-Convolutional Neural Networks (CNN) have also achieved 
-high accuracy in this binary classification task.
-Other studies have shown that artifacts can be detected using
-features extracted from raw images. 
-\cite{1601.06320} achieved reliable
-classification by transforming transient data from the OGLE-IV
-data-reduction pipeline and training it with machine learning
-algorithms such as Artificial Neural Networks, Support Vector
-Machines, Random Forests, Naive Bayes, K-Nearest Neighbors and Linear
-Discriminant Analysis.  
-Similarly, \cite{1501.05470} used images from Pan-STARS1 Medium Deep
-Surveys, and \cite{1407.4118} processed single-epoch multi-band images
-from the SDSS supernova survey for the same purpose.  
+These two characteristics (size and heteregoneity) have
+motivated the application of Machine Learning (ML) algorithms to face
+this challenge.  
+For instance, Random Forests, MultiLayer Perceptron and K-Nearest
+Neighbours have been used on lightcurves to classify transients from
+the Catalina Real Time Transient Survey \citep{1601.03931};  
+convolutional neural networks have been used as 
+input to automatic vetting algorithms (quick classification of bogus
+vs. real transients) based on data from the SkyMapper Supernova and
+Transient  Survey and the High cadence Transient Survey (HiTS)
+\citep{1708.08947,1701.00458}.
 
-
-A complementary approach uses the lightcurves computed from the
-images to perform the classification task.
-For instance \cite{1601.03931} used classical machine learning
-algorithms such as Random Forest, MultiLayer Perceptron and K-Nearest Neighbours
-lightcurves to classify transients from the Catalina Real Time
-Transient Survey; \cite{1603.00882} used the same approach to find
-supernovas from the Supernova Photometric Classification
-Challenge.
-
-A crucial element in the development of any ML algorithm is the
-compilation of the training dataset. 
-In astronomy this task has been facilitated by the publication of
-large databases from different observational projects. 
-However, the publications that make use of these datasets still make
-extensive use of the internal know-how of the scientific
-collaboration. 
+The success of these examples, and any other ML implementation,
+depends on the quality of the training dataset.
+Usually, new ML results come from gropus internal to a scientific
+collaboration.
+They have the levarage to make extensive use of the internal know-how,
+and sometimes privileged access, on how the data is structured.
 It is still difficult for other scientists to rebuild a training
-dataset and perform comparisons with published results.
+dataset and perform comparisons with published results.  
 
-To address this issue, we compile and publish in easy-to-access files a
-dataset that can be used to train and test different ML algorithms for
-transient detection.
+Building traning datasets has been facilitated by the publication of
+large databases from different observational projects.
+Other collaborations  have directly published large datasets of simulated
+hoping to trigger more involvement from the ML in astronomy
+community at large to develop new classification algorithms \citep{2018arXiv181000001T}.
+
+To help address the issue of making available datasets for ML
+training, we compile and publish in easy-to-access files a dataset
+that can be used to train and test different ML algorithms for transient detection.
 We use public data from the Catalina Real-Time Transient Survey
 (CRTS) \citep{1111.2566}, an astronomical survey searching transient
 and highly variable objects as base for the dataset.
 In this paper we present lightcurve data, in a future publication we
 will present an imaging dataset. 
 
+\newpage
 In Section \ref{sec:data} we present the CRTS and the steps we follow
 to build the dataset.
 Then, in Section \ref{sec:repository} we describe its main features together
