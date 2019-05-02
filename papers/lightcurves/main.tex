@@ -134,17 +134,17 @@ methods: data analysis, statistical
 
 
 Large scale automatic detection and classification of astronomical
-transient is happens internally to surveys such as Pan-STARRS1
+transient is happening within surveys such as Pan-STARRS1
 \citep{2004SPIE.5489...11K}, the Palomar Transient Factory
 \citep{2009PASP..121.1395L},  the Catalina Real-Time Transient Survey
 \citep{2009ApJ...696..870D}, the All-Sky Automated Survey for
 SuperNovae \citep{2014ApJ...788...48S}, the Zwicky Transient
 Factory \citep{2019PASP..131a8002B}.
-Besides the sheear amount of data, astronomical transients
+Besides the large amount of data, transient
 classification is hard because the data is usually heterogeneous,
 unbalanced, sparse, unevenly sampled and with missing information.   
 
-These two characteristics (size and heteregoneity) have
+These two characteristics (size and heterogeneity) have
 motivated the application of Machine Learning (ML) algorithms to face
 this challenge.  
 For instance, Random Forests, MultiLayer Perceptron and K-Nearest
@@ -158,27 +158,29 @@ Transient  Survey and the High cadence Transient Survey (HiTS)
 
 The success of these examples, and any other ML implementation,
 depends on the quality of the training dataset.
-Usually, new ML results come from gropus internal to a scientific
-collaboration.
-They have the levarage to make extensive use of the internal know-how,
-and sometimes privileged access, on how the data is structured.
-It is still difficult for other scientists to rebuild a training
-dataset and perform comparisons with published results.  
+New ML results usually come from groups internal to an observational
+collaboration as they have the leverage to make extensive use of the
+internal know-how (and, sometimes, privileged access) to experiment
+and build training datasets.
+It is challenging for other scientists to rebuild a training
+dataset, perform comparisons with published results and suggest new
+algorithms. 
 
-Building traning datasets has been facilitated by the publication of
-large databases from different observational projects.
-Other collaborations  have directly published large datasets of simulated
+Nonetheless, building traning datasets has been facilitated by the
+publication of large databases from different observational projects.
+Other collaborations have directly published large datasets of simulated
 hoping to trigger more involvement from the ML in astronomy
 community at large to develop new classification algorithms \citep{2018arXiv181000001T}.
 
-To help address the issue of making available datasets for ML
-training, we compile and publish in easy-to-access files a dataset
-that can be used to train and test different ML algorithms for transient detection.
+In this paper we compile and publish in easy-to-access files a dataset
+that can be used to train and test different ML algorithms for
+transient detection. 
 We use public data from the Catalina Real-Time Transient Survey
 (CRTS) \citep{1111.2566}, an astronomical survey searching transient
 and highly variable objects as base for the dataset.
-In this paper we present lightcurve data, in a future publication we
-will present an imaging dataset. 
+In this paper we present lightcurve data.
+In a second part to this paper we will present will present an imaging
+dataset from the same survey. 
 
 \newpage
 In Section \ref{sec:data} we present the CRTS and the steps we follow
