@@ -44,7 +44,7 @@
 \usepackage{amssymb}	% Extra maths symbols
 \usepackage{pdflscape}	% Landscape pages
 \usepackage[utf8]{inputenc}
-
+\usepackage{multirow}
 \usepackage{float} % here for H placement parameter
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -520,66 +520,82 @@ Vector Machines (SVMs).
 
 These algorithms are popular in published studies and are efficient 
 for low dimensional feature datasets as is our case. 
-We use sklearn \citep{1201.0490} Python's implementation of these algorithms.
-Details on the inner workings of these machine learning models can be
-found in \cite{9780387848570}.  
+We use sklearn \citep{1201.0490} Python's implementation of random forests and support vector machines. 
+Details on the inner workings of these machine learning models can be found in \cite{9780387848570}.
+
+We use the pytorch library for python for the development of the linear neural Networks. It consists of a series of fully connected layers that map the features to the corresponding number of classes. At each layer, a 1d batch normalization is implemented followed by a relu activtion function. The final layer invokes a softmax activation function to transform the numercal values to class probabilities.
+
 The hyperparameters explored for each algorithm are the
 following. 
 
 \begin{itemize}
 \item Neural Networks:
 \begin{itemize}
-\item Learning Rate: Either constant vs. adaptive.
-\item Hidden Layer Sizes: Single Layer with $100$ nodes vs. Two layers with
-  $100$ nodes each.
-\item L2 Penalty ($\alpha$): 
-  $10^{-1}$, $10^{-2}$, $10^{-3}$ , $10^{-4}$.
-\item Activation Function: Logistic vs. Relu.
+\item Learning Rate: $\{0.1,0.01,0.001,0.0001\}$
+\item Hidden Layer Sizes: Single , double or triple layers with $500$ nodes each.
 \end{itemize}
 
 \item Random Forest:
 \begin{itemize}
     \item Number of Estimators: $200$ or $700$.
-    \item Number of features considered: Square Root or the Logarithm 
-    base 2 of the total number of features.
+    \item Number of features considered: Square root or $log_2$ of the total number of features.
 \end{itemize}
 
 \item Support Vector Machines:
 \begin{itemize}
-    \item Kernel: Radial Basis Function (RBF).
+    \item Kernels: Radial Basis Function (RBF), linear or sigmoid.
     \item Kernel Coefficient ($\gamma$):  
-      $10^{-1}$, $10^{-2}$, $10^{-3}$ , $10^{-4}$, $10^{-5}$
-    \item Error Penalty (\textit{C}): 1 vs 10 vs 100 vs 1000. 
+      $\{0.125, 2, 32\}$
+    \item Error Penalty (\textit{C}): $\{0.125, 2, 32\}$
 \end{itemize}
 \end{itemize}
 
 \subsection{Validation} \label{subsection_importances}
 
-We split the input lightcurves into training and testing. 
-The testing set contains 4869 unique transient lightcurves.
-We use 2-fold cross-validation during training as evaluation
-protocol. 
-Moreover, we use grid search during training to test multiple 
-hyperparameter configurations for each one of the proposed methods.
+We split the input lightcurves into training and testing in a $75:25$ ratio respectively, class by class.
 
 
-\begin{figure*}
-	\includegraphics[width=\textwidth]{binFeatImportance.pdf}
-    \caption{Feature importance rank  for the best Random Forest
-      classifier for the Binary classification task. 
-      Feature importance is represented with percentages.} 
-    \label{Importances-Binary}
-\end{figure*} 
+For the random forests and the SVM, we use a grid search over the hyperparameter combinations with a 2-fold cross-validation over the training set to determine the best hyperparameters. 
 
-\begin{figure*}
-	\includegraphics[width=\textwidth]{8classFeatImportance.pdf}
-    \caption{Feature importance rank for the best Random Forest
-      classifier for the best 8-Class classification task. Feature
-      importance is represented with percentages.} 
-    \label{Importances-8-Class}
-\end{figure*}
+For the neural networks, at each epoch, the network is evaluated on the test data. 
+% \begin{figure*}
+% 	\includegraphics[width=\textwidth]{binFeatImportance.pdf}
+%     \caption{Feature importance rank  for the best Random Forest
+%       classifier for the Binary classification task. 
+%       Feature importance is represented with percentages.} 
+%     \label{Importances-Binary}
+% \end{figure*} 
+
+% \begin{figure*}
+% 	\includegraphics[width=\textwidth]{8classFeatImportance.pdf}
+%     \caption{Feature importance rank for the best Random Forest
+%       classifier for the best 8-Class classification task. Feature
+%       importance is represented with percentages.} 
+%     \label{Importances-8-Class}
+% \end{figure*}
 
 \subsection{Results}
+
+Table \ref{table:all-avg-results} shows the average class precision, recall and F1-measre for each of the classification tasks and algorithms liste above. 
+
+
+\begin{table}
+\centering
+% \resizebox{0.45\textwidth}{!}{%
+\begin{tabular}{ccccc}
+\hline
+\multicolumn{1}{l}{\textbf{Case}} & \textbf{Classifier} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} \\ \hline \hline
+\multirow{3}{*}{Binary}                 & RF                  & \textbf{86.615}    & \textbf{86.615} & \textbf{86.615}   \\
+                                        & SVM                 & 82.615             & 82.525          & 82.57             \\
+                                        & NN                  & 71.84              & 73.19           & 72.51             \\ \hline
+\multirow{3}{*}{8 Class}                & RF                  & 46.25              & \textbf{63.59}  & 50.38             \\
+                                        & SVM                 & 32.94              & 55.22           & 36.60             \\
+                                        & NN                  & \textbf{61.86}     & 61.86           & \textbf{61.86}   \\ \hline
+\end{tabular}%
+% }
+\caption{Average precision, recall and F1-score accross all classes for each algorithm and classification task. Best results per metric per classification task are highlighted in bold.}
+\label{table:all-avg-results}
+\end{table}
 
 %%%%%%  BINARY  %%%%%%
 \subsubsection{Binary Classification} 
@@ -592,7 +608,7 @@ Changing the number of features does not significantly affect the score.
 NNs are ranked third, although their scores are very similar to those of SVMs. 
 The highest achieved score for NNs is 85.03\%.
 
-Table \ref{Confusion-Binary} shows the confusion matrix of the best
+Figure \ref{fig:normalizedBinaryCM} shows the confusion matrix of the best
 performing algorithm and Table \ref{Overall-Scores-Binary} summarizes 
 the metrics for transient and non-transient class. These results suggest 
 that in an imbalanced set up, non-transient sources are better classified, 
@@ -622,17 +638,25 @@ Transient              & 79.10     & 79.10      & 79.10      & 1067    \\ \hline
 \label{Overall-Scores-Binary}
 \end{table}
 
-\begin{table}
-\centering
-\begin{tabular}{|r|c|c|}
-\hline
-\multicolumn{1}{|l|}{} & Non-Transient    & Transient   \\ \hline \hline
-Non-Transient                & 3575       & 223    \\ \hline
-Transient                    & 223       & 844   \\ \hline
-\end{tabular}
-\caption{Confusion Matrix for the best performing model in the Binary task. Rows represent prediction and columns the ground truth.}
-\label{Confusion-Binary}
-\end{table}
+% \begin{table}
+% \centering
+% \begin{tabular}{|r|c|c|}
+% \hline
+% \multicolumn{1}{|l|}{} & Non-Transient    & Transient   \\ \hline \hline
+% Non-Transient                & 3575       & 223    \\ \hline
+% Transient                    & 223       & 844   \\ \hline
+% \end{tabular}
+% \caption{Confusion Matrix for the best performing model in the Binary task. Rows represent prediction and columns the ground truth.}
+% \label{Confusion-Binary}
+% \end{table}
+
+\begin{figure}
+	\includegraphics[width=0.5\textwidth]{normalizedCMBinary.png}
+  \caption{Confusion Matrix for the best performing model in the Binary task. Rows represent prediction and columns the ground truth.}
+  \label{fig:normalizedBinaryCM}
+\end{figure} 
+
+
 
 
 
@@ -679,47 +703,75 @@ followed by \texttt{amp}, \texttt{sk}, \texttt{std}, \texttt{mad},
 with values around 6\%.   
 
 
+% \begin{table}
+% \centering
+% \begin{tabular}{|r|c|c|c|c|}
+% \hline
+% \multicolumn{1}{|l|}{} & Precision & Recall & F1-Score & No. instances \\ \hline \hline
+% SN            &   48.82 &   51.39  &  50.07  &  323 \\ \hline
+% CV            &   66.96 &   70.69  &  68.77  &  215 \\ \hline
+% AGN           &   48.14 &   85.84  &  61.69  &  106 \\ \hline
+% HPM           &   25.19 &   86.84  &  39.05  &   76 \\ \hline
+% Blazar       &   46.77 &   49.15  &  47.93  &   59 \\ \hline
+% Flare       &    7.00 &   41.17  &  11.96  &   51 \\ \hline
+% Other         &   31.11 &   44.01  &  36.46  &  234 \\ \hline
+% Non-Transient &   96.06 &   79.69  &  87.12  & 3798 \\ \hline
+% avg/total     &   46.25 &   63.59  &  50.38  & 4862 \\ \hline
+% \end{tabular}
+% \caption{Precision, Recall and F1-Score for the 8-Class Classification Task.}
+% \label{Overall-Scores-8-Class-Regular}
+% \end{table}
+
 \begin{table}
 \centering
-\begin{tabular}{|r|c|c|c|c|}
+% \resizebox{\textwidth}{!}{%
+\begin{tabular}{cccc}
 \hline
-\multicolumn{1}{|l|}{} & Precision & Recall & F1-Score & No. instances \\ \hline \hline
-SN            &   48.82 &   51.39  &  50.07  &  323 \\ \hline
-CV            &   66.96 &   70.69  &  68.77  &  215 \\ \hline
-AGN           &   48.14 &   85.84  &  61.69  &  106 \\ \hline
-HPM           &   25.19 &   86.84  &  39.05  &   76 \\ \hline
-Blazar       &   46.77 &   49.15  &  47.93  &   59 \\ \hline
-Flare       &    7.00 &   41.17  &  11.96  &   51 \\ \hline
-Other         &   31.11 &   44.01  &  36.46  &  234 \\ \hline
-Non-Transient &   96.06 &   79.69  &  87.12  & 3798 \\ \hline
-avg/total     &   46.25 &   63.59  &  50.38  & 4862 \\ \hline
-\end{tabular}
+\textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} \\\hline \hline
+SN             & 34.89              & 34.67           & 34.78             \\\hline
+CV             & 61.86              & 61.86           & 61.86             \\\hline
+AGN            & 34.84              & 72.64           & 47.09             \\\hline
+HPM            & 11.90              & 85.52           & 20.90             \\\hline
+Blazar         & 26.78              & 50.84           & 35.08             \\\hline
+Flare          & 5.25               & 43.13           & 9.36              \\\hline
+Other          & 18.26              & 26.06           & 21.47             \\\hline
+Non-Tr.        & 94.20              & 66.82           & 78.18             \\\hline
+avg/total      & 61.86              & 61.86           & 61.86             \\\hline
+\end{tabular}%
 \caption{Precision, Recall and F1-Score for the 8-Class Classification Task.}
 \label{Overall-Scores-8-Class-Regular}
+% }
 \end{table}
 
-\begin{table}
-\centering
-\begin{tabular}{|r|c|c|c|c|c|c|c|c|}
-\hline
-\multicolumn{1}{|l|}{} & \rotatebox{90}{SN}    & \rotatebox{90}{CV}
-& \rotatebox{90}{AGN}   & \rotatebox{90}{HPM}    &
-\rotatebox{90}{Blazar}  & \rotatebox{90}{Flare}  &
-\rotatebox{90}{Other}   & \rotatebox{90}{Non-Tr.}  \\ \hline \hline
-SN            & 166  &  25  &  0  &  0  &  7   &  5  &  40 &   97 \\ \hline
-CV            &  17  & 152  &  0  &  1  &  5   &  3  &  12 &   37 \\ \hline
-AGN           &   1  &   2  & 91  &  0  & 10   &  1  &  35 &   49 \\ \hline
-HPM           &   5  &   0  &  0  & 66  &  0   &  0  &   5 &  186 \\ \hline
-Blazar       &   8  &  13  &  4  &  0  & 29   &  0  &   6 &    2 \\ \hline
-Flare        &  16  &   5  &  0  &  0  &  3   & 21  &   4 &  251 \\ \hline
-Other        &  53  &  12  &  7  &  1  &  3   &  3  & 103 &  149 \\ \hline
-Non-Tr. &  57  &   6  &  4  &  8  &  2   & 18  &  29 & 3027 \\ \hline
-\end{tabular}
-\caption{Confusion Matrix for the best performing model in the 8-class
+% \begin{table}
+% \centering
+% \begin{tabular}{|r|c|c|c|c|c|c|c|c|}
+% \hline
+% \multicolumn{1}{|l|}{} & \rotatebox{90}{SN}    & \rotatebox{90}{CV}
+% & \rotatebox{90}{AGN}   & \rotatebox{90}{HPM}    &
+% \rotatebox{90}{Blazar}  & \rotatebox{90}{Flare}  &
+% \rotatebox{90}{Other}   & \rotatebox{90}{Non-Tr.}  \\ \hline \hline
+% SN            & 166  &  25  &  0  &  0  &  7   &  5  &  40 &   97 \\ \hline
+% CV            &  17  & 152  &  0  &  1  &  5   &  3  &  12 &   37 \\ \hline
+% AGN           &   1  &   2  & 91  &  0  & 10   &  1  &  35 &   49 \\ \hline
+% HPM           &   5  &   0  &  0  & 66  &  0   &  0  &   5 &  186 \\ \hline
+% Blazar       &   8  &  13  &  4  &  0  & 29   &  0  &   6 &    2 \\ \hline
+% Flare        &  16  &   5  &  0  &  0  &  3   & 21  &   4 &  251 \\ \hline
+% Other        &  53  &  12  &  7  &  1  &  3   &  3  & 103 &  149 \\ \hline
+% Non-Tr. &  57  &   6  &  4  &  8  &  2   & 18  &  29 & 3027 \\ \hline
+% \end{tabular}
+% \caption{Confusion Matrix for the best performing model in the 8-class
+%   task. The classes follow the abbreviations in Table \ref{Overall-Scores-8-Class-Regular}. Rows represent the predictions, and columns the ground truth.}
+% \label{Confusion-8-Class}
+% \end{table}
+
+
+\begin{figure}
+	\includegraphics[width=0.5\textwidth]{normalizedCM.png}
+  \caption{Confusion Matrix for the best performing model in the 8-class
   task. The classes follow the abbreviations in Table \ref{Overall-Scores-8-Class-Regular}. Rows represent the predictions, and columns the ground truth.}
-\label{Confusion-8-Class}
-\end{table}
-
+  \label{fig:normalized8ClassCM}
+\end{figure} 
 
 
 \section{Conclusions}
