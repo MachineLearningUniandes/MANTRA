@@ -16,7 +16,8 @@
 \usepackage{float} 
 
 \begin{document}
-\title{A eference dataset for astronomical transient event recognition I: lightcurves}
+\title{MANTRA: A reference dataset for astronomical transient event
+  recognition. Part I: lightcurves}
 
 \author{Mauricio Neira}
 \affiliation{
@@ -67,10 +68,9 @@ Bogot\'a, Colombia}
 
 
 \begin{abstract}
-We introduce ATTAC (Annotated Transient caTAlina Catalog) an
-annotated dataset of $4869$ transient and $16940$ non-transient
-object lightcurves built from the Catalina Real Time Transient
-Survey.
+We introduce MANTRA, an annotated dataset of $4869$ transient and
+$16940$ non-transient object lightcurves built from the Catalina Real
+Time Transient Survey.
 We provide public access to this dataset as a plain text file to facilitate
 standardized quantitative comparison of astronomical transient event
 recognition algorithms. 
@@ -83,10 +83,12 @@ machine learning algorithms (Support Vector Machines, Random Forests
 and Neural Networks).   
 We assess quantitative performance in two classification tasks:
 binary (transient/non-transient) and eight-class classification.   
-The best performing algorithm is a Random Forest Classifier for both
-classification experiments.  
-The next release of ATTAC will include images and benchmarks with
-deep learning models. 
+The best performing algorithm in the binary classification task 
+is a Random Forest Classifier with an F1-score of 86.61.
+For the eight-class classification Neural Networks have the best
+overall results with an F1-score of 61.86.
+The next release of MANTRA includes images and benchmarks with deep
+learning models.  
 \end{abstract}
 
 \keywords{catalogs}
@@ -122,9 +124,9 @@ The success of these examples, and any other ML implementation,
 depends on the quality of the training dataset.
 New ML results usually come from groups internal to an observational
 collaboration because they have the internal know-how (and, sometimes,
-privileged access) to experiment and build training datasets.
-This difference in data access, makes it challenging for other
-scientists to rebuild a training dataset, perform comparisons with
+privileged access) to build training datasets.
+This difference in data access makes it challenging for the broader
+astronomical community to rebuild a training dataset, perform comparisons with
 published results and suggest new algorithms. 
 
 Nonetheless, building traning datasets has been facilitated by the
@@ -134,17 +136,18 @@ hoping to trigger more involvement from the ML in astronomy
 community at large to develop new classification algorithms \citep{2018arXiv181000001T}.
 
 In this paper we aim at bridging the data access gap.
-We compile and publish in easy-to-access files a dataset
+To this end we compile and publish in easy-to-access files a dataset
 that can be used to train and test different ML algorithms for
-transient detection. 
+transient classification. 
 We use public data from the Catalina Real-Time Transient Survey
 (CRTS) \citep{1111.2566}, an astronomical survey searching transient
 and highly variable objects as base for the dataset.
 Here, in the first paper, we present the lightcurve data.
-In a second paper, we will present an imaging dataset from the same
+In a second paper we will present a curated imaging dataset from the same
 survey.   
 
-\newpage
+
+This paper is structured as follows.
 In Section \ref{sec:data} we present the CRTS and the steps we follow
 to build the dataset.
 Then, in Section \ref{sec:repository} we describe its main features together
@@ -288,7 +291,7 @@ and non-transient sources in Figure \ref{fig:examples_transient} and Figure \ref
 The brightness evolution of non-transient sources is more stable over time, 
 while transient objects present non-periodical changes at different time scales. 
 
-%resatar dificultad del problema: no hay una base de datos estándar con datos reales
+
 The challenges in the classification of lightcurves 
 include the inherent nature of transient events, which is reflected 
 in different brightness behaviors, their evolution over time, and 
@@ -303,7 +306,7 @@ We study two classification tasks on the MANTRA dataset:
 \begin{itemize}
 \item {Binary Classification}.
 Using a balanced number of events from both classes in order 
-to investigate the capability of distinguishing between Transient
+to investigate the capability of distinguishing between transient
 and non-transient sources.
 \item{8-Class Classification}.
 Using the unbalanced number of objects across classes to 
@@ -349,14 +352,14 @@ provided in the CRTS database.
 
 \section{Machine Learning Methods} 
 \label{sec:ml_tests}
-In order to provide baseline algorithms on the MANTRA dataset 
-that can be used as a reference for future work, we apply ML methods 
-to perform different classification tasks. 
-In Figure \ref{fig:ML} we show an overview of our method for transient classification. 
+Here we test baseline algorithms on the MANTRA dataset that can be
+used as a reference for future work.
+Figure \ref{fig:ML} shows an overview of our transient classification framework.
 The main steps include data processing, feature extraction and classification.  
 
 
 \subsection{Preprocessing and Feature Extraction}
+
 We do not input directly the annotated lightcurves to the ML algorithms.
 We perform a preprocessing stage as follows. 
 First, we discard lightcurves with less than 10 data points observations
@@ -364,7 +367,12 @@ as they may not contain enough information to be classified correctly.
 
 \begin{figure*}
 	\includegraphics[width=0.9\textwidth]{ML.pdf}
-  \caption{Overview of the Machine Learning process on the MANTRA dataset for the binary and 8-class classification tasks. We take the raw lightcurves as input, preprocess the data (step 1) and balance the classes for the training phase (step 2). The final classification (step 4) follows the feature extraction stage (step 3).}
+  \caption{Overview of the Machine Learning process on the MANTRA
+    dataset for the binary and 8-class classification tasks. We take
+    the raw lightcurves as input, preprocess the data (step 1) and
+    balance the classes for the training phase (step 2). 
+    We extract the features (step 3) that are feed into the ML
+    algorithms that perform the classification task (step 4).}
   \label{fig:ML}
 \end{figure*} 
 
@@ -487,7 +495,13 @@ for low dimensional feature datasets as is our case.
 We use sklearn \citep{1201.0490} Python's implementation of random forests and support vector machines. 
 Details on the inner workings of these machine learning models can be found in \cite{9780387848570}.
 
-We use the pytorch library for python for the development of the linear neural Networks. It consists of a series of fully connected layers that map the features to the corresponding number of classes. At each layer, a 1d batch normalization is implemented followed by a relu activtion function. The final layer invokes a softmax activation function to transform the numercal values to class probabilities.
+We use the pytorch library for python for the development of the
+linear Neural Networks. 
+It consists of a series of fully connected layers that map the
+features to the corresponding number of classes. At each layer, a 1d
+batch normalization is implemented followed by a relu activtion
+function. The final layer calls a softmax activation function to
+transform the numerical values to class probabilities. 
 
 The hyperparameters explored for each algorithm are the
 following. 
