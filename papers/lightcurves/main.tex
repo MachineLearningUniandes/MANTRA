@@ -1,100 +1,71 @@
-% mnras_template.tex
-%
-% LaTeX template for creating an MNRAS paper
-%
-% v3.0 released 14 May 2015
-% (version numbers match those of mnras.cls)
-%
-% Copyright (C) Royal Astronomical Society 2015
-% Authors:
-% Keith T. Smith (Royal Astronomical Society)
+\documentclass{aastex62}
+\submitjournal{ApJS}
+\shorttitle{A reference transient dataset I: lightcurves}
+\shortauthors{Neira et al.}
 
-% Change log
-%
-% v3.0 May 2015
-%    Renamed to match the new package name
-%    Version number matches mnras.cls
-%    A few minor tweaks to wording
-% v1.0 September 2013
-%    Beta testing only - never publicly released
-%    First version: a simple (ish) template for creating an MNRAS paper
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Basic setup. Most papers should leave these options alone.
-\documentclass[usenatbib]{mnras}
-
-% MNRAS is set in Times font. If you don't have this installed (most LaTeX
-% installations will be fine) or prefer the old Computer Modern fonts, comment
-% out the following line
-%\usepackage{newtxtext,newtxmath}
 \usepackage{import}
 \usepackage{hyperref}
-
-% Depending on your LaTeX fonts installation, you might get better results with one of these:
-%\usepackage{mathptmx}
-%\usepackage{txfonts}
-
-% Use vector fonts, so it zooms properly in on-screen viewing software
-% Don't change these lines unless you know what you are doing
 \usepackage[T1]{fontenc}
 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
 
-\usepackage{graphicx}	% Including figure files
-\usepackage{amsmath}	% Advanced maths commands
-\usepackage{amssymb}	% Extra maths symbols
-\usepackage{pdflscape}	% Landscape pages
 \usepackage[utf8]{inputenc}
 \usepackage{multirow}
-\usepackage{float} % here for H placement parameter
+\usepackage{float} 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
-
-% Please keep new commands to a minimum, and use \newcommand not \def to avoid
-% overwriting existing commands. Example:
-%\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
-
-% Title of the paper, and the short title which is used in the headers.
-% Keep the title short and informative.
-\title[A reference transient dataset I: lightcurves]{A reference
-  dataset for astronomical transient event recognition I: lightcurves}
-
-
-
-% The list of authors, and the short list which is used in the headers.
-% If you need two or more lines of authors, add an extra line using \newauthor
-\author[M. Neira et al.]
-{Mauricio Neira$^{1}$, Catalina G\'omez$^{2}$, Diego A. G\'omez $^{1}$,
-Juan Pablo Reyes$^{1}$,
-\newauthor
-Marcela Hern\'andez Hoyos$^{1}$,   
-Pablo Arbel\'aez$^{2}$,
-Jaime E. Forero-Romero$^{3}$
-\\
-% List of institutions
-$^{1}$Systems and Computing Engineering Department, Universidad de los Andes, Cra. 1 No. 18A-10, Bogot\'a, Colombia\\
-$^{2}$Departamento de Ingenier\'ia Biom\'edica, Universidad de los Andes, Cra. 1 No. 18A-10, Bogot\'a, Colombia\\
-$^{3}$Departamento de F\'isica, Universidad de los Andes, Cra. 1 No. 18A-10, Bogot\'a, Colombia
-}
-
-% These dates will be filled out by the publisher
-\date{Accepted XXX. Received YYY; in original form ZZZ}
-
-% Enter the current year, for the copyright statements etc.
-\pubyear{2019}
-
-% Don't change these lines
 \begin{document}
-\label{firstpage}
-\pagerange{\pageref{firstpage}--\pageref{lastpage}}
-\maketitle
+\title{A eference dataset for astronomical transient event recognition I: lightcurves}
 
-% Abstract of the paper
+\author{Mauricio Neira}
+\affiliation{
+Systems and Computing Engineering Department\\
+Universidad de los Andes\\
+Cra. 1 No. 18A-10\\
+Bogot\'a, Colombia}
+
+\author{Catalina G\'omez}
+\affiliation{Departamento de Ingenier\'ia Biom\'edica\\
+Universidad de los Andes\\ 
+Cra. 1 No. 18A-10\\
+Bogot\'a, Colombia\\}
+
+\author{Diego A. G\'omez}
+\affiliation{
+Systems and Computing Engineering Department\\
+Universidad de los Andes\\
+Cra. 1 No. 18A-10\\
+Bogot\'a, Colombia}
+
+\author{Juan Pablo Reyes}
+\affiliation{
+Systems and Computing Engineering Department\\
+Universidad de los Andes\\
+Cra. 1 No. 18A-10\\
+Bogot\'a, Colombia}
+
+\author{Marcela Hern\'andez Hoyos}
+\affiliation{
+Systems and Computing Engineering Department\\
+Universidad de los Andes\\
+Cra. 1 No. 18A-10\\
+Bogot\'a, Colombia}
+
+
+\author{Pablo Arbel\'aez}
+\affiliation{Departamento de Ingenier\'ia Biom\'edica\\
+Universidad de los Andes\\ 
+Cra. 1 No. 18A-10\\
+Bogot\'a, Colombia}
+
+\author{Jaime E. Forero-Romero}
+\affiliation{Departamento de F\'isica\\
+Universidad de los Andes\\
+Cra. 1 No. 18A-10\\
+Bogot\'a, Colombia}
+
+
 \begin{abstract}
 We introduce ATTAC (Annotated Transient caTAlina Catalog) an
 annotated dataset of $4869$ transient and $16940$ non-transient
@@ -118,16 +89,7 @@ The next release of ATTAC will include images and benchmarks with
 deep learning models. 
 \end{abstract}
 
-% Select between one and six entries from the list of approved keywords.
-% Don't make up new ones.
-\begin{keywords}
-methods: data analysis, statistical
-%keyword1 -- keyword2 -- keyword3
-\end{keywords}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
+\keywords{catalogs}
 
 \section{Introduction}
 
@@ -210,7 +172,7 @@ The telescope is equipped with a 111-megapixel  detector, and covered
 4000 square degrees per night, with a limiting magnitude of 19.5 in
 the V band.  
 
-Putting together the lightcurves for ATRANCCATA implies
+Putting together the lightcurves for MANTRA implies
 cross-matching different files in the legacy CRTS webpage:
 \url{http://nesssi.cacr.caltech.edu/DataRelease/CRTS-I_transients.html}. 
 The photometry is stored in two different kinds of files: \verb"phot"
@@ -234,7 +196,7 @@ associated lightcurve. Figure \ref{fig:transients} summarizes this process.
 
 \begin{figure*}
 	\includegraphics[width=0.9\textwidth]{Transients.pdf}
-  \caption{ATRANCCATA Dataset Set Up: Lightcurve compilation for transient classes.}
+  \caption{MANTRA Dataset Set Up: Lightcurve compilation for transient classes.}
   \label{fig:transients}
 \end{figure*} 
 
@@ -257,7 +219,7 @@ We end up with 16940 unique non-transient lightcurves. Figure \ref{fig:non-trans
 
 \begin{figure*}
 	\includegraphics[width=0.7\textwidth]{NonTransients.pdf}
-  \caption{ATRANCCATA Dataset Set Up: Lightcurve compilation for non-transients.}
+  \caption{MANTRA Dataset Set Up: Lightcurve compilation for non-transients.}
   \label{fig:non-transients}
 \end{figure*} 
 
@@ -298,15 +260,17 @@ CV? & 77 \\
 
 
 \begin{figure*}
+\begin{center}
   \includegraphics[width=0.6\textwidth]{examples_transient.pdf}
-  \caption{Randomly selected lightcurves for the most represented transient classes as compiled in ATRANCCATA. The class of each sample is within the legend box. }  
+\end{center}
+  \caption{Randomly selected lightcurves for the most represented transient classes as compiled in MANTRA. The class of each sample is within the legend box. }  
   \label{fig:examples_transient}
 \end{figure*} 
 
 
 \begin{figure*}
   \includegraphics[width=0.6\textwidth]{examples_nontransient.pdf}
-  \caption{Randomly selected lightcurves for non-transient sources retrieved for ATRANCCATA.}
+  \caption{Randomly selected lightcurves for non-transient sources retrieved for MANTRA.}
   \label{fig:examples_non_transient}
 \end{figure*} 
 
@@ -334,7 +298,7 @@ and perform their subsequent classification.
 
 
 \subsection{Classification Tasks} \label{subsection_classification}
-We study two classification tasks on the ATRANCCATA dataset: 
+We study two classification tasks on the MANTRA dataset: 
 
 \begin{itemize}
 \item {Binary Classification}.
@@ -359,7 +323,7 @@ thresholds on the output probabilities of belonging to each class.
 
 The repository contains the lightcurves and a Jupyter notebook
 to reproduce some of the Figures and Tables in this paper.
-The repository can be found in \url{https://github.com/MachineLearningUniandes/ATRANCCATA}. 
+The repository can be found in \url{https://github.com/MachineLearningUniandes/MANTRA}. 
 To date the repository has two main folders:
 \begin{itemize}
 
@@ -385,7 +349,7 @@ provided in the CRTS database.
 
 \section{Machine Learning Methods} 
 \label{sec:ml_tests}
-In order to provide baseline algorithms on the ATRANCCATA dataset 
+In order to provide baseline algorithms on the MANTRA dataset 
 that can be used as a reference for future work, we apply ML methods 
 to perform different classification tasks. 
 In Figure \ref{fig:ML} we show an overview of our method for transient classification. 
@@ -400,7 +364,7 @@ as they may not contain enough information to be classified correctly.
 
 \begin{figure*}
 	\includegraphics[width=0.9\textwidth]{ML.pdf}
-  \caption{Overview of the Machine Learning process on the ATRANCCATA dataset for the binary and 8-class classification tasks. We take the raw lightcurves as input, preprocess the data (step 1) and balance the classes for the training phase (step 2). The final classification (step 4) follows the feature extraction stage (step 3).}
+  \caption{Overview of the Machine Learning process on the MANTRA dataset for the binary and 8-class classification tasks. We take the raw lightcurves as input, preprocess the data (step 1) and balance the classes for the training phase (step 2). The final classification (step 4) follows the feature extraction stage (step 3).}
   \label{fig:ML}
 \end{figure*} 
 
@@ -638,20 +602,11 @@ Transient              & 79.10     & 79.10      & 79.10      & 1067    \\ \hline
 \label{Overall-Scores-Binary}
 \end{table}
 
-% \begin{table}
-% \centering
-% \begin{tabular}{|r|c|c|}
-% \hline
-% \multicolumn{1}{|l|}{} & Non-Transient    & Transient   \\ \hline \hline
-% Non-Transient                & 3575       & 223    \\ \hline
-% Transient                    & 223       & 844   \\ \hline
-% \end{tabular}
-% \caption{Confusion Matrix for the best performing model in the Binary task. Rows represent prediction and columns the ground truth.}
-% \label{Confusion-Binary}
-% \end{table}
 
 \begin{figure}
-	\includegraphics[width=0.5\textwidth]{normalizedCMBinary.png}
+\begin{center}
+	\includegraphics[width=0.6\textwidth]{normalizedCMBinary.png}
+\end{center}
   \caption{Confusion Matrix for the best performing model in the Binary task. Rows represent prediction and columns the ground truth.}
   \label{fig:normalizedBinaryCM}
 \end{figure} 
@@ -702,26 +657,6 @@ This list ranks first \texttt{stetson\_j} with an 8\% importance,
 followed by \texttt{amp}, \texttt{sk}, \texttt{std}, \texttt{mad},
 with values around 6\%.   
 
-
-% \begin{table}
-% \centering
-% \begin{tabular}{|r|c|c|c|c|}
-% \hline
-% \multicolumn{1}{|l|}{} & Precision & Recall & F1-Score & No. instances \\ \hline \hline
-% SN            &   48.82 &   51.39  &  50.07  &  323 \\ \hline
-% CV            &   66.96 &   70.69  &  68.77  &  215 \\ \hline
-% AGN           &   48.14 &   85.84  &  61.69  &  106 \\ \hline
-% HPM           &   25.19 &   86.84  &  39.05  &   76 \\ \hline
-% Blazar       &   46.77 &   49.15  &  47.93  &   59 \\ \hline
-% Flare       &    7.00 &   41.17  &  11.96  &   51 \\ \hline
-% Other         &   31.11 &   44.01  &  36.46  &  234 \\ \hline
-% Non-Transient &   96.06 &   79.69  &  87.12  & 3798 \\ \hline
-% avg/total     &   46.25 &   63.59  &  50.38  & 4862 \\ \hline
-% \end{tabular}
-% \caption{Precision, Recall and F1-Score for the 8-Class Classification Task.}
-% \label{Overall-Scores-8-Class-Regular}
-% \end{table}
-
 \begin{table}
 \centering
 % \resizebox{\textwidth}{!}{%
@@ -743,31 +678,11 @@ avg/total      & 61.86              & 61.86           & 61.86             \\\hli
 % }
 \end{table}
 
-% \begin{table}
-% \centering
-% \begin{tabular}{|r|c|c|c|c|c|c|c|c|}
-% \hline
-% \multicolumn{1}{|l|}{} & \rotatebox{90}{SN}    & \rotatebox{90}{CV}
-% & \rotatebox{90}{AGN}   & \rotatebox{90}{HPM}    &
-% \rotatebox{90}{Blazar}  & \rotatebox{90}{Flare}  &
-% \rotatebox{90}{Other}   & \rotatebox{90}{Non-Tr.}  \\ \hline \hline
-% SN            & 166  &  25  &  0  &  0  &  7   &  5  &  40 &   97 \\ \hline
-% CV            &  17  & 152  &  0  &  1  &  5   &  3  &  12 &   37 \\ \hline
-% AGN           &   1  &   2  & 91  &  0  & 10   &  1  &  35 &   49 \\ \hline
-% HPM           &   5  &   0  &  0  & 66  &  0   &  0  &   5 &  186 \\ \hline
-% Blazar       &   8  &  13  &  4  &  0  & 29   &  0  &   6 &    2 \\ \hline
-% Flare        &  16  &   5  &  0  &  0  &  3   & 21  &   4 &  251 \\ \hline
-% Other        &  53  &  12  &  7  &  1  &  3   &  3  & 103 &  149 \\ \hline
-% Non-Tr. &  57  &   6  &  4  &  8  &  2   & 18  &  29 & 3027 \\ \hline
-% \end{tabular}
-% \caption{Confusion Matrix for the best performing model in the 8-class
-%   task. The classes follow the abbreviations in Table \ref{Overall-Scores-8-Class-Regular}. Rows represent the predictions, and columns the ground truth.}
-% \label{Confusion-8-Class}
-% \end{table}
-
 
 \begin{figure}
-	\includegraphics[width=0.5\textwidth]{normalizedCM.png}
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{normalizedCM.png}
+\end{center}
   \caption{Confusion Matrix for the best performing model in the 8-class
   task. The classes follow the abbreviations in Table \ref{Overall-Scores-8-Class-Regular}. Rows represent the predictions, and columns the ground truth.}
   \label{fig:normalized8ClassCM}
@@ -787,7 +702,7 @@ from the Catalina Real-Time Transient Survey.
 The data-set compiles  $4869$ transient and $16940$ non-transient
 lightcurves. 
 The dataset is publicly available at
-\url{https://github.com/MachineLearningUniandes/ATRANCCATA}.   
+\url{https://github.com/MachineLearningUniandes/MANTRA}.   
 
 We illustrated how to use this database by extracting 
 characteristic features to use them as input to train three different
