@@ -1,4 +1,4 @@
-\documentclass{aastex62}
+\documentclass[twocolumn]{aastex62}
 \submitjournal{ApJS}
 \shorttitle{A reference transient dataset I: lightcurves}
 \shortauthors{Neira et al.}
@@ -84,9 +84,9 @@ and Neural Networks).
 We assess quantitative performance in two classification tasks:
 binary (transient/non-transient) and eight-class classification.   
 The best performing algorithm in the binary classification task 
-is a Random Forest Classifier with an F1-score of 86.61.
+is a Random Forest Classifier with an F1-score of $86.61\%$.
 For the eight-class classification Neural Networks have the best
-overall results with an F1-score of 61.86.
+overall results with an F1-score of $61.86\%$.
 The next release of MANTRA includes images and benchmarks with deep
 learning models.  
 \end{abstract}
@@ -198,7 +198,9 @@ We ignore the duplicates to end up with 4869 unique transients with an
 associated lightcurve. Figure \ref{fig:transients} summarizes this process. 
 
 \begin{figure*}
-	\includegraphics[width=0.9\textwidth]{Transients.pdf}
+\begin{center}
+  \includegraphics[width=0.9\textwidth]{Transients.pdf}
+\end{center}
   \caption{MANTRA Dataset Set Up: Lightcurve compilation for transient classes.}
   \label{fig:transients}
 \end{figure*} 
@@ -221,7 +223,9 @@ and removing known transient lightcurves from that set.
 We end up with 16940 unique non-transient lightcurves. Figure \ref{fig:non-transients} illustrates this process.
 
 \begin{figure*}
-	\includegraphics[width=0.7\textwidth]{NonTransients.pdf}
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{NonTransients.pdf}
+\end{center}
   \caption{MANTRA Dataset Set Up: Lightcurve compilation for non-transients.}
   \label{fig:non-transients}
 \end{figure*} 
@@ -251,8 +255,10 @@ CV? & 77 \\
 
 
 \begin{figure*}
-	\includegraphics[width=0.45\textwidth]{cumulative_magnitude.pdf}
+\begin{center}
+  \includegraphics[width=0.45\textwidth]{cumulative_magnitude.pdf}
   \includegraphics[width=0.45\textwidth]{cumulative_classes.pdf}
+\end{center}
   \caption{Cumulative number of lightcurves (expressed as a fraction)
     as a function of average magnitude (left) and number of data
     points in the lightcurve (right).
@@ -272,7 +278,9 @@ CV? & 77 \\
 
 
 \begin{figure*}
+\begin{center}
   \includegraphics[width=0.6\textwidth]{examples_nontransient.pdf}
+\end{center}
   \caption{Randomly selected lightcurves for non-transient sources retrieved for MANTRA.}
   \label{fig:examples_non_transient}
 \end{figure*} 
@@ -366,7 +374,9 @@ First, we discard lightcurves with less than 10 data points observations
 as they may not contain enough information to be classified correctly.
 
 \begin{figure*}
-	\includegraphics[width=0.9\textwidth]{ML.pdf}
+\begin{center}
+  \includegraphics[width=0.9\textwidth]{ML.pdf}
+\end{center}
   \caption{Overview of the Machine Learning process on the MANTRA
     dataset for the binary and 8-class classification tasks. We take
     the raw lightcurves as input, preprocess the data (step 1) and
@@ -487,13 +497,15 @@ These groups of features are:
 \subsection{ML algorithms}
 
 We conduct experiments with three widely used families of supervised classification 
-algorithms \citep{skysurvey, 1601.03931}: Neural Networks (NNs), Random Forests (RFs) and Support
-Vector Machines (SVMs). 
+algorithms \citep{skysurvey, 1601.03931}: Neural Networks (NNs),
+Random Forests (RFs) and Support Vector Machines (SVMs).  
 
 These algorithms are popular in published studies and are efficient 
 for low dimensional feature datasets as is our case. 
-We use sklearn \citep{1201.0490} Python's implementation of random forests and support vector machines. 
-Details on the inner workings of these machine learning models can be found in \cite{9780387848570}.
+We use sklearn \citep{1201.0490} Python's implementation of random
+forests and support vector machines.  
+Details on the inner workings of these machine learning models can be
+found in \cite{9780387848570}. 
 
 We use the pytorch library for python for the development of the
 linear Neural Networks. 
@@ -516,7 +528,8 @@ following.
 \item Random Forest:
 \begin{itemize}
     \item Number of Estimators: $200$ or $700$.
-    \item Number of features considered: Square root or $log_2$ of the total number of features.
+    \item Number of features considered: Square root or $log_2$ of the
+      total number of features. 
 \end{itemize}
 
 \item Support Vector Machines:
@@ -530,31 +543,20 @@ following.
 
 \subsection{Validation} \label{subsection_importances}
 
-We split the input lightcurves into training and testing in a $75:25$ ratio respectively, class by class.
+We split the input lightcurves into training and testing in a $75:25$
+ratio respectively, class by class. 
+For the random forests and the SVM, we use a grid search over the
+hyperparameter combinations with a 2-fold cross-validation over the
+training set to determine the best hyperparameters.  
+For the neural networks, at each epoch, the network is evaluated on
+the test data.  
 
-
-For the random forests and the SVM, we use a grid search over the hyperparameter combinations with a 2-fold cross-validation over the training set to determine the best hyperparameters. 
-
-For the neural networks, at each epoch, the network is evaluated on the test data. 
-% \begin{figure*}
-% 	\includegraphics[width=\textwidth]{binFeatImportance.pdf}
-%     \caption{Feature importance rank  for the best Random Forest
-%       classifier for the Binary classification task. 
-%       Feature importance is represented with percentages.} 
-%     \label{Importances-Binary}
-% \end{figure*} 
-
-% \begin{figure*}
-% 	\includegraphics[width=\textwidth]{8classFeatImportance.pdf}
-%     \caption{Feature importance rank for the best Random Forest
-%       classifier for the best 8-Class classification task. Feature
-%       importance is represented with percentages.} 
-%     \label{Importances-8-Class}
-% \end{figure*}
 
 \subsection{Results}
 
-Table \ref{table:all-avg-results} shows the average class precision, recall and F1-measre for each of the classification tasks and algorithms liste above. 
+Table \ref{table:all-avg-results} shows the average class precision,
+recall and F1-measre for each of the classification tasks and
+algorithms liste above.  
 
 
 \begin{table}
@@ -563,85 +565,77 @@ Table \ref{table:all-avg-results} shows the average class precision, recall and 
 \begin{tabular}{ccccc}
 \hline
 \multicolumn{1}{l}{\textbf{Case}} & \textbf{Classifier} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} \\ \hline \hline
-\multirow{3}{*}{Binary}                 & RF                  & \textbf{86.615}    & \textbf{86.615} & \textbf{86.615}   \\
-                                        & SVM                 & 82.615             & 82.525          & 82.57             \\
+\multirow{3}{*}{Binary}                 & RF                  & \textbf{86.61}    & \textbf{86.61} & \textbf{86.61}   \\
+                                        & SVM                 & 82.61             & 82.525          & 82.57             \\
                                         & NN                  & 71.84              & 73.19           & 72.51             \\ \hline
 \multirow{3}{*}{8 Class}                & RF                  & 46.25              & \textbf{63.59}  & 50.38             \\
                                         & SVM                 & 32.94              & 55.22           & 36.60             \\
                                         & NN                  & \textbf{61.86}     & 61.86           & \textbf{61.86}   \\ \hline
 \end{tabular}%
 % }
-\caption{Average precision, recall and F1-score accross all classes for each algorithm and classification task. Best results per metric per classification task are highlighted in bold.}
+\caption{Average precision, recall and F1-score accross all classes
+  for each algorithm and classification task. Best results per metric
+  per classification task are in bold.} 
 \label{table:all-avg-results}
 \end{table}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[width=0.6\textwidth]{normalizedCMBinary.png}
+\end{center}
+  \caption{Confusion Matrix for the best performing model in the
+    Binary task. Rows represent prediction and columns the ground
+    truth.} 
+  \label{fig:normalizedBinaryCM}
+\end{figure} 
+
+
+\begin{figure*}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{normalizedCM.png}
+\end{center}
+  \caption{Confusion Matrix for the best performing model in the 8-class
+  task. The classes follow the abbreviations in Table
+  \ref{Overall-Scores-8-Class-Regular}. Rows represent the
+  predictions, and columns the ground truth.} 
+  \label{fig:normalized8ClassCM}
+\end{figure*} 
+
+
 
 %%%%%%  BINARY  %%%%%%
 \subsubsection{Binary Classification} 
 \label{Results-Binary} 
 
 The best algorithm in this task is RFs with an average F1-Score of
-87.69\%.   
-SVMs are the second best-performing model with a F1-Score of 85.36\%. 
+$86.61\%$.   
+SVMs are the second best-performing model with a F1-Score of $82.57\%$. 
 Changing the number of features does not significantly affect the score.
-NNs are ranked third, although their scores are very similar to those of SVMs. 
-The highest achieved score for NNs is 85.03\%.
+NNs are ranked third with an F1-Score of $72.51\%$
 
 Figure \ref{fig:normalizedBinaryCM} shows the confusion matrix of the best
-performing algorithm and Table \ref{Overall-Scores-Binary} summarizes 
-the metrics for transient and non-transient class. These results suggest 
-that in an imbalanced set up, non-transient sources are better classified, 
-while transients are more difficult, showing a difference of about 
-14 points in F1-Score compared to the non-transient class. 
+performing algorithm. These results suggest that in an imbalanced set
+up, non-transient sources are better classified while transients are
+more difficult, showing a difference of about  15 points in the
+percentage of correct classifications.  
 This difference in performance could be attributed to the intra-class
-variation within the transient class because of the different 
-types of transient sources.  
-
-Figure \ref{Importances-Binary} displays the most important features
-for the RFs classifier.
-The top five inputs for classification are \texttt{stetson\_j},
-\texttt{std}, \texttt{mad}, \texttt{poly1\_t1} and \texttt{poly2\_t1}.  
-The first feature achieved the highest importance of 21\%, compared to
-the following with values in the range 6\% - 8\%.  
-
-
-\begin{table}
-\centering
-\begin{tabular}{|r|c|c|c|c|}
-\hline
-\multicolumn{1}{|l|}{} & Precision & Recall & F1-Score & No. instances \\ \hline \hline
-Non-Transient          & 94.13     & 94.13      & 94.13      & 3798   \\ \hline
-Transient              & 79.10     & 79.10      & 79.10      & 1067    \\ \hline
-\end{tabular}
-\caption{Precision, Recall and F1-Score for the Binary Classification Task.}
-\label{Overall-Scores-Binary}
-\end{table}
-
-
-\begin{figure}
-\begin{center}
-	\includegraphics[width=0.6\textwidth]{normalizedCMBinary.png}
-\end{center}
-  \caption{Confusion Matrix for the best performing model in the Binary task. Rows represent prediction and columns the ground truth.}
-  \label{fig:normalizedBinaryCM}
-\end{figure} 
-
-
-
+variation within the transients.
 
 
 %%%%%%  EIGHT-CLASS  %%%%%%
 \subsubsection{Eight-Class Classification}
 
-For this task, RFs are again the best classifier.  
-The best F1-Score is 66.05\%. 
-NNs are the second best model. 
-Their highest F1-Score is 60.19\%, while SVMs are the worst-performing
-model only achieving an average F1-Score of 57.30\%.
+For this task, NNs are again the best classifier.  
+The best F1-Score is $61.86\%$. 
+RFs are the second best model with an F1-Score is $50.38\%$, while
+SVMs are the worst-performing model only achieving an average F1-Score
+of $36.60\%$.   
 Table \ref{Overall-Scores-8-Class-Regular} summarizes the results for 
-individual classes and Table \ref{Confusion-8-Class} presents 
-the confusion matrix for the RFs.
+individual classes and Figure  \ref{fig:normalized8ClassCM} presents 
+the confusion matrix for the NNs.
 
-The two classes with highest F1-Score are non-transient (87.12\%) and CV (68.77\%). 
+The two classes with highest F1-Score are non-transient ($78.18\%$) and
+CV (68.77\%).  
 The recall decreases for the non-transient class in comparison to the binary experiment, 
 meaning that the algorithm misclassified some instances that belong to non-transient class
 among transient classes. 
@@ -692,15 +686,6 @@ avg/total      & 61.86              & 61.86           & 61.86             \\\hli
 % }
 \end{table}
 
-
-\begin{figure}
-\begin{center}
-	\includegraphics[width=0.8\textwidth]{normalizedCM.png}
-\end{center}
-  \caption{Confusion Matrix for the best performing model in the 8-class
-  task. The classes follow the abbreviations in Table \ref{Overall-Scores-8-Class-Regular}. Rows represent the predictions, and columns the ground truth.}
-  \label{fig:normalized8ClassCM}
-\end{figure} 
 
 
 \section{Conclusions}
