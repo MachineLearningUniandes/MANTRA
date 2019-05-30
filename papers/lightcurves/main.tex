@@ -568,9 +568,9 @@ algorithms liste above.
 \multirow{3}{*}{Binary}                 & RF                  & \textbf{86.61}    & \textbf{86.61} & \textbf{86.61}   \\
                                         & SVM                 & 82.61             & 82.525          & 82.57             \\
                                         & NN                  & 71.84              & 73.19           & 72.51             \\ \hline
-\multirow{3}{*}{8 Class}                & RF                  & 46.25              & \textbf{63.59}  & 50.38             \\
+\multirow{3}{*}{8 Class}                & RF                  & \textbf{46.25}     & \textbf{63.59}  & \textbf{50.38}             \\
                                         & SVM                 & 32.94              & 55.22           & 36.60             \\
-                                        & NN                  & \textbf{61.86}     & 61.86           & \textbf{61.86}   \\ \hline
+                                        & NN                  & 36.0     & 55.19           & 38.59   \\ \hline
 \end{tabular}%
 % }
 \caption{Average precision, recall and F1-score accross all classes
@@ -581,7 +581,7 @@ algorithms liste above.
 
 \begin{figure}
 \begin{center}
-  \includegraphics[width=0.6\textwidth]{normalizedCMBinary.png}
+  \includegraphics[width=0.5\textwidth]{normalizedCMBinary.pdf}
 \end{center}
   \caption{Confusion Matrix for the best performing model in the
     Binary task. Rows represent prediction and columns the ground
@@ -592,7 +592,7 @@ algorithms liste above.
 
 \begin{figure*}
 \begin{center}
-\includegraphics[width=0.8\textwidth]{normalizedCM.png}
+\includegraphics[width=0.8\textwidth]{normalizedCM.pdf}
 \end{center}
   \caption{Confusion Matrix for the best performing model in the 8-class
   task. The classes follow the abbreviations in Table
@@ -668,18 +668,18 @@ with values around 6\%.
 \begin{table}
 \centering
 % \resizebox{\textwidth}{!}{%
-\begin{tabular}{cccc}
+\begin{tabular}{ccccc}
 \hline
-\textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} \\\hline \hline
-SN             & 34.89              & 34.67           & 34.78             \\\hline
-CV             & 61.86              & 61.86           & 61.86             \\\hline
-AGN            & 34.84              & 72.64           & 47.09             \\\hline
-HPM            & 11.90              & 85.52           & 20.90             \\\hline
-Blazar         & 26.78              & 50.84           & 35.08             \\\hline
-Flare          & 5.25               & 43.13           & 9.36              \\\hline
-Other          & 18.26              & 26.06           & 21.47             \\\hline
-Non-Tr.        & 94.20              & 66.82           & 78.18             \\\hline
-avg/total      & 61.86              & 61.86           & 61.86             \\\hline
+\textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score}& \textbf{Cover} \\\hline \hline
+SN             & 48.82	& 51.39 &	50.07	 & 323 \\\hline
+CV             & 66.96	& 70.69 &	68.77	 & 215 \\\hline
+AGN            & 48.14	& 85.84 &	61.69	 & 106 \\\hline
+HPM            & 25.19	& 86.84 &	39.05	 & 76 \\\hline
+Blazar         & 46.77	& 49.15 &	47.93	 & 59 \\\hline
+Flare          & 7.00	& 41.17 &	11.96	 & 51 \\\hline
+Other          & 31.11	& 44.01 &	36.46	 & 234 \\\hline
+Non-Tr.        & 96.06	& 79.69 &	87.12	 & 3798 \\\hline
+avg/total      & 46.25	& 63.60 &	50.38	 & 4862 \\\hline
 \end{tabular}%
 \caption{Precision, Recall and F1-Score for the 8-Class Classification Task.}
 \label{Overall-Scores-8-Class-Regular}
