@@ -53,7 +53,6 @@ Universidad de los Andes\\
 Cra. 1 No. 18A-10\\
 Bogot\'a, Colombia}
 
-
 \author{Pablo Arbel\'aez}
 \affiliation{Departamento de Ingenier\'ia Biom\'edica\\
 Universidad de los Andes\\ 
@@ -83,10 +82,13 @@ machine learning algorithms (Support Vector Machines, Random Forests
 and Neural Networks).   
 We assess quantitative performance in two classification tasks:
 binary (transient/non-transient) and eight-class classification.   
-The best performing algorithm in the binary classification task 
-is a Random Forest Classifier with an F1-score of $86.61\%$.
-For the eight-class classification Neural Networks have the best
-overall results with an F1-score of $61.86\%$.
+The best performing algorithm in both task is the Random Forest Classifier.
+It achieves an F1-score of $86.61\%$ in the binary
+classification and $50.38\%$ in the eight-class classification.
+For the latter, the class with the highest F1-score are non-transients
+($87.12\%$) and the lowest corresponds to flares ($11.96\%$); for
+supernovae it achieves a value of $50.07\%$, close to the average
+across classes. 
 The next release of MANTRA includes images and benchmarks with deep
 learning models.  
 \end{abstract}
@@ -555,7 +557,7 @@ the test data.
 \subsection{Results}
 
 Table \ref{table:all-avg-results} shows the average class precision,
-recall and F1-measre for each of the classification tasks and
+recall and F1-measure for each of the classification tasks and
 algorithms liste above.  
 
 
