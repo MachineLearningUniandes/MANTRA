@@ -627,17 +627,17 @@ variation within the transients.
 %%%%%%  EIGHT-CLASS  %%%%%%
 \subsubsection{Eight-Class Classification}
 
-For this task, NNs are again the best classifier.  
-The best F1-Score is $61.86\%$. 
-RFs are the second best model with an F1-Score is $50.38\%$, while
+For this task, RF is again the best classifier.
+The best F1-Score is $50.38\%$. 
+NNs are the second best model with an F1-Score is $36.60\%$, while
 SVMs are the worst-performing model only achieving an average F1-Score
-of $36.60\%$.   
+of $38.59\%$.   
 Table \ref{Overall-Scores-8-Class-Regular} summarizes the results for 
 individual classes and Figure  \ref{fig:normalized8ClassCM} presents 
-the confusion matrix for the NNs.
+the confusion matrix for the RF.
 
-The two classes with highest F1-Score are non-transient ($78.18\%$) and
-CV (68.77\%).  
+The two classes with highest F1-Score are non-transient ($87.12\%$) and
+CV ($68.77\%$).  
 The recall decreases for the non-transient class in comparison to the binary experiment, 
 meaning that the algorithm misclassified some instances that belong to non-transient class
 among transient classes. 
@@ -647,25 +647,8 @@ range 11\% - 40\%.
 It is worth noting that the less frequent classes present a lower performance, 
 such as Flare and HPM. 
 Even though the most frequent classes are more easily identified, 
-the "other" type class has a low F1-score due to the different nature 
-of sources that were assigned to this category. 
-
-
-SN is the class with which most other class instances are
-incorrectly classified. 
-Moreover, Flares have about 50\% of the test samples classified as
-non-transients, AGNs have about 20\% of their 
-samples classified as Other, and Blazars and Other had most of  its
-samples classified as AGN. 
-Additionally, most incorrectly classified AGNs ($\sim$20.5\%) are
-identified as Other, and most Blazar instances are
-incorrectly categorized as either SN or AGN. 
-
-
-Figure \ref{Importances-8-Class} displays the feature importance ranking.
-This list ranks first \texttt{stetson\_j} with an 8\% importance,
-followed by \texttt{amp}, \texttt{sk}, \texttt{std}, \texttt{mad},
-with values around 6\%.   
+the "other" type class has a low F1-score due to the diverse nature 
+of sources assigned to this category. 
 
 \begin{table}
 \centering
@@ -696,11 +679,13 @@ avg/total      & 46.25	& 63.60 &	50.38	 & 4862 \\\hline
 The scope of forthcoming large astronomical synoptic surveys 
 motivates the development and exploration of automatized ways to
 detect transient sources. 
-In turn, this need prompts the compilation of publicly available databases
-to train and test new algorithms. 
-In this paper we presented the results of such a compilation based on data
-from the Catalina Real-Time Transient Survey.
-The data-set compiles  $4869$ transient and $16940$ non-transient
+Such developments require observational datasets to train and test new
+algorithms.  
+Making these datasets public and easy to access have the potential
+open the field to a larger number of contributors.
+With these goals in mind, in this paper we presented a compilation
+based on data from the Catalina Real-Time Transient Survey.
+The dataset has  $4869$ transient and $16940$ non-transient
 lightcurves. 
 The dataset is publicly available at
 \url{https://github.com/MachineLearningUniandes/MANTRA}.   
