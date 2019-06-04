@@ -681,8 +681,8 @@ motivates the development and exploration of automatized ways to
 detect transient sources. 
 Such developments require observational datasets to train and test new
 algorithms.  
-Making these datasets public and easy to access have the potential
-open the field to a larger number of contributors.
+Making these datasets public and easy to access has the potential
+to open the field to a larger number of contributors.
 With these goals in mind, in this paper we presented a compilation
 based on data from the Catalina Real-Time Transient Survey.
 The dataset has  $4869$ transient and $16940$ non-transient
@@ -698,15 +698,27 @@ The features extracted from lightcurves were either statistical
 descriptors of the observations, or polynomial curve fitting
 coefficients applied to the lightcurves.   
 Overall, the best classifier for all tasks was the Random Forest.
-In this model the most important feature was always
-\texttt{stetson$\_$j}, i.e. a robust estimate for the standard
-deviation. 
+Neural Networks showed the worst performance in the binary
+classification task and the second best in the 8-class classification
+task. 
 
-In a second paper we will present another reference dataset for
-astronomical transient event recognition based on images of the
-CRTS.
-The corresponding tests will use  state-of-the art deep learning
-techniques for transient classification. 
+Certainly other classification algorithms could be used on the MANTRA
+lightcurves. Our purpose here is not a thorough analysis of machine
+learning algorithms. Our focus is in the compilation of the data into
+a format that could easily be used for different projects that could
+be addressed with MANTRA. 
+For instance the supernovae detection problem could be studied as a
+classfication problem between SN and the other classes, including
+non-transients. 
+Considering extremely unbalanced classes could also be addressed
+with the dataset we are presenting by simply using less samples for
+the SN class and keeping a large numbers for the non-transient class.  
+
+
+In a second paper we will present the second part of MANTRA.
+It corresponds to almost one million images from the CRTS.
+These will be tested using state-of-the art deep learning techniques
+for transient classification.  
 
 \section*{Acknowledgements}
 
