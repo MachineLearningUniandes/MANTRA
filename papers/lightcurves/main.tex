@@ -104,7 +104,7 @@ transients is happening within surveys such as Pan-STARRS1
 \citep{2004SPIE.5489...11K}, the Palomar Transient Factory
 \citep{2009PASP..121.1395L},  the Catalina Real-Time Transient Survey
 \citep{2009ApJ...696..870D}, the All-Sky Automated Survey for
-SuperNovae \citep{2014ApJ...788...48S}, the Zwicky Transient
+SuperNovae \citep{2014ApJ...788...48S} and the Zwicky Transient
 Factory \citep{2019PASP..131a8002B}.
 Besides the large amount of data, transient
 classification is hard because the data is usually heterogeneous,
@@ -122,28 +122,37 @@ vs. real transients) based on data from the SkyMapper Supernova and
 Transient  Survey and the High cadence Transient Survey (HiTS)
 \citep{1708.08947,1701.00458}.
 
-The success of these examples, and any other ML implementation,
-depends on the quality of the training dataset.
+% The success of these examples, and any other ML implementation,
+% depends on the quality of the training dataset.
+The quality of the dataset \textit{is a necesarry but insufficient} 
+requirement for the success of these examples and of any other ML implementation.
 New ML results usually come from groups internal to an observational
 collaboration because they have the internal know-how (and, sometimes,
 privileged access) to build training datasets.
+Consequently, despite having a lot of data available in the public domain,
+much of it is difficult to access.
 This difference in data access makes it challenging for the broader
 astronomical community to rebuild a training dataset, perform comparisons with
 published results and suggest new algorithms. 
 
 Nonetheless, building traning datasets has been facilitated by the
 publication of large databases from different observational projects.
-Other collaborations have directly published large datasets of simulated
+Other collaborations have directly published large datasets of \textit{simulated transients}
 hoping to trigger more involvement from the ML in astronomy
 community at large to develop new classification algorithms \citep{2018arXiv181000001T}.
+However, at the time of writing, \textit{no dataset for transients has been made accesible 
+to the public in the form of a catalogue based on \textbf{real data}.}
 
-In this paper we aim at bridging the data access gap.
+% In this paper we aim at bridging the data access gap. //problematic phrase
 To this end we compile and publish in easy-to-access files a dataset
 that can be used to train and test different ML algorithms for
 transient classification. 
 We use public data from the Catalina Real-Time Transient Survey
 (CRTS) \citep{1111.2566}, an astronomical survey searching transient
 and highly variable objects as base for the dataset.
+Effectively, we developed an ETL (extract, transform and load) procedure to extract
+the data from CRTS, which is designed for a esporadic lookup of a few objects, into a 
+catalogue of thousands of objects that can be used to train ML algorithms and establish benchmarks.
 Here, in the first paper, we present the lightcurve data.
 In a second paper we will present a curated imaging dataset from the same
 survey.   
@@ -342,14 +351,14 @@ To date the repository has two main folders:
 
 \item \texttt{data/lightcurves}: 
 contains three text files in CSV format
-the transient lightcurves (\texttt{transient\_lightcurves.csv}),
-the labels for the transients (\texttt{transient\_labels.csv}) and
+the transient lightcurves (\path{transient_lightcurves.csv}),
+the labels for the transients (\path{transient_labels.csv}) and
 the lightcurves for non-transient objects
-(\texttt{nontransient\_lightcurves.csv}). 
+(\path{nontransient_lightcurves.csv}). 
 The first two files can be linked by unique transient IDs and
 provided in the CRTS database. 
 \item \texttt{nb-explore}: includes a jupyter notebook
-  (\texttt{explore\_light\_curves.ipynb}) with examples on how to read
+  (\path{explore_light_curves.ipynb}) with examples on how to read
   and plot transient and non-transient lightcurves, extract the statistics in Table
   \ref{table:top_classes} and prepare the summary statistics in Figure
   \ref{fig:cumulative}. 
@@ -396,7 +405,8 @@ from an observed one.
 We generate a slightly different lightcurve from the observed lightcurve and 
 then sample the observed magnitude from a Gaussian distribution
 centered on the observational apparent magnitude with the magnitude's
-error as the standard deviation. 
+error as the standard deviation. It is important to note that \textit{the oversampling
+was only done on the train set. The test set was left untouched.}
 
 
 Finally, we compute a standard set of features for each lightcurve. 
