@@ -1,227 +1,184 @@
-% mnras_template.tex
-%
-% LaTeX template for creating an MNRAS paper
-%
-% v3.0 released 14 May 2015
-% (version numbers match those of mnras.cls)
-%
-% Copyright (C) Royal Astronomical Society 2015
-% Authors:
-% Keith T. Smith (Royal Astronomical Society)
+\documentclass[twocolumn]{aastex62}
+\submitjournal{ApJS}
+\shorttitle{A reference transient dataset I: lightcurves}
+\shortauthors{Neira et al.}
 
-% Change log
-%
-% v3.0 May 2015
-%    Renamed to match the new package name
-%    Version number matches mnras.cls
-%    A few minor tweaks to wording
-% v1.0 September 2013
-%    Beta testing only - never publicly released
-%    First version: a simple (ish) template for creating an MNRAS paper
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Basic setup. Most papers should leave these options alone.
-\documentclass[a4paper,fleqn,usenatbib]{mnras}
-
-% MNRAS is set in Times font. If you don't have this installed (most LaTeX
-% installations will be fine) or prefer the old Computer Modern fonts, comment
-% out the following line
-%\usepackage{newtxtext,newtxmath}
 \usepackage{import}
 \usepackage{hyperref}
-
-% Depending on your LaTeX fonts installation, you might get better results with one of these:
-%\usepackage{mathptmx}
-%\usepackage{txfonts}
-
-% Use vector fonts, so it zooms properly in on-screen viewing software
-% Don't change these lines unless you know what you are doing
 \usepackage[T1]{fontenc}
-\usepackage{ae,aecompl}
 
-\usepackage{graphicx}	% Including figure files
-\usepackage{amsmath}	% Advanced maths commands
-\usepackage{amssymb}	% Extra maths symbols
-\usepackage{pdflscape}	% Landscape pages
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
 \usepackage[utf8]{inputenc}
 \usepackage{multirow}
-\usepackage{float} % here for H placement parameter
+\usepackage{float} 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
-
-% Please keep new commands to a minimum, and use \newcommand not \def to avoid
-% overwriting existing commands. Example:
-%\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
-
-% Title of the paper, and the short title which is used in the headers.
-% Keep the title short and informative.
-\title[A reference transient dataset I: lightcurves]{A reference
-  dataset for astronomical transient event recognition I: lightcurves
-  and tests on classical machine learning algorithms}
-
-
-% The list of authors, and the short list which is used in the headers.
-% If you need two or more lines of authors, add an extra line using \newauthor
-\author[M. Neira et al.]
-{Mauricio Neira$^{1}$, Catalina G\'omez$^{2}$, Diego A. G\'omez $^{1}$,
-Juan Pablo Reyes$^{1}$,
-\newauthor
-Marcela Hern\'andez Hoyos$^{1}$,   
-Pablo Arbel\'aez$^{2}$,
-Jaime E. Forero-Romero$^{3}$
-\\
-% List of institutions
-$^{1}$Systems and Computing Engineering Department, Universidad de los Andes, Cra. 1 No. 18A-10, Bogot\'a, Colombia\\
-$^{2}$Departamento de Ingenier\'ia Biom\'edica, Universidad de los Andes, Cra. 1 No. 18A-10, Bogot\'a, Colombia\\
-$^{3}$Departamento de F\'isica, Universidad de los Andes, Cra. 1 No. 18A-10, Bogot\'a, Colombia
-}
-
-% These dates will be filled out by the publisher
-\date{Accepted XXX. Received YYY; in original form ZZZ}
-
-% Enter the current year, for the copyright statements etc.
-\pubyear{2019}
-
-% Don't change these lines
 \begin{document}
-\label{firstpage}
-\pagerange{\pageref{firstpage}--\pageref{lastpage}}
-\maketitle
+\title{MANTRA: A reference dataset for astronomical transient event
+  recognition. Part I: lightcurves}
 
-% Abstract of the paper
+\author{Mauricio Neira}
+\affiliation{
+Systems and Computing Engineering Department\\
+Universidad de los Andes\\
+Cra. 1 No. 18A-10\\
+Bogot\'a, Colombia}
+
+\author{Catalina G\'omez}
+\affiliation{Departamento de Ingenier\'ia Biom\'edica\\
+Universidad de los Andes\\ 
+Cra. 1 No. 18A-10\\
+Bogot\'a, Colombia\\}
+
+\author{Diego A. G\'omez}
+\affiliation{
+Systems and Computing Engineering Department\\
+Universidad de los Andes\\
+Cra. 1 No. 18A-10\\
+Bogot\'a, Colombia}
+
+\author{Juan Pablo Reyes}
+\affiliation{
+Systems and Computing Engineering Department\\
+Universidad de los Andes\\
+Cra. 1 No. 18A-10\\
+Bogot\'a, Colombia}
+
+\author{Marcela Hern\'andez Hoyos}
+\affiliation{
+Systems and Computing Engineering Department\\
+Universidad de los Andes\\
+Cra. 1 No. 18A-10\\
+Bogot\'a, Colombia}
+
+\author{Pablo Arbel\'aez}
+\affiliation{Departamento de Ingenier\'ia Biom\'edica\\
+Universidad de los Andes\\ 
+Cra. 1 No. 18A-10\\
+Bogot\'a, Colombia\\}
+
+\author{Jaime E. Forero-Romero}
+\affiliation{Departamento de F\'isica\\
+Universidad de los Andes\\
+Cra. 1 No. 18A-10\\
+Bogot\'a, Colombia}
+
+
 \begin{abstract}
-
-We introduce ATRANCCATA (Annotated TRANsient Catalina CATAlog) an
-annotated dataset of $4869$ transient and $16940$ non-transient
-object lightcurves built from the Catalina Real Time Transient
-Survey.
-We provide access to this dataset as a plain text file to facilitate
-standarized quantitative comparison of astronomical transient event
+We introduce MANTRA, an annotated dataset of $4869$ transient and
+$16940$ non-transient object lightcurves built from the Catalina Real
+Time Transient Survey.
+We provide public access to this dataset as a plain text file to facilitate
+standardized quantitative comparison of astronomical transient event
 recognition algorithms. 
 Some of the classes included in the dataset are: supernovae, cataclismic
 variables, active galactic nuclei, high proper motion stars, blazars
 and flares.
-As an example on how to use the dataset we experiment with multiple
-data pre-processing methods, feature selection techniques and classic
+As a complement to the dataset, we experiment with multiple
+data pre-processing methods, feature selection techniques and popular
 machine learning algorithms (Support Vector Machines, Random Forests
 and Neural Networks).   
 We assess quantitative performance in two classification tasks:
 binary (transient/non-transient) and eight-class classification.   
-The best performing algorithm is a Random Forest Classifier for both
-classification experiments.  
-The next release of ATRANCCATA will include images and benchmarks with
-deep learning models. 
-All our code and data is available to the community at
-\url{https://github.com/MachineLearningUniandes/ATRANCCATA}.
+The best performing algorithm in both task is the Random Forest Classifier.
+It achieves an F1-score of $86.61\%$ in the binary
+classification and $50.38\%$ in the eight-class classification.
+For the latter, the class with the highest F1-score are non-transients
+($87.12\%$) and the lowest corresponds to flares ($11.96\%$); for
+supernovae it achieves a value of $50.07\%$, close to the average
+across classes. 
+The next release of MANTRA includes images and benchmarks with deep
+learning models.  
 \end{abstract}
 
-% Select between one and six entries from the list of approved keywords.
-% Don't make up new ones.
-\begin{keywords}
-methods: data analysis, statistical
-%keyword1 -- keyword2 -- keyword3
-\end{keywords}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
-
+\keywords{Astronomy databases (83), Transient detection (1957),
+  Astrostatistics tools (1887)}   
 \section{Introduction}
 
-The study and detection of astronomical variable sources is expected
-to occur on unprecedented scales with the new generation of
-forthcoming multi-epoch and multi-band (synoptic) astronomical
-surveys. 
-For instance, projects like the Large Synoptic Survey Telescope
-(LSST)  \citep{0805.2366,1512.07914} are expected to generate
-exuberant daily data-streams near to 20 petabytes every night.   
-
-One of the main challenges that these datasets want to address is
-Real-Time Transient classification \citep{2004SPIE.5489...11K,2009PASP..121.1395L,2014ApJ...788...48S,2018PASP..130f4505T,2019PASP..131a8002B} including phenomena such
-as supernovae, novae, neutron  
-stars, blazars, pulsars, cataclysmic variable stars (CV), gamma ray
-bursts (GRB) and active galaxy nuclei (AGN). 
-The time-domain dependency of these objects is one of the reasons why
-they are hard to classify: their data is usually heterogeneous,
-unbalanced, sparse, unevenly sampled and with missing information. 
-This has motived the use of Machine Learning (ML) algorithms to recognize
-and classify transient events. 
 
 
-There have been successful attempts to implement these algorithms
-using images as an input.
-For instance, data from the SkyMapper Supernova and Transient
-Survey and the High cadence Transient Survey (HiTS) have been used as
-inputs to automatic detection algorithms \citep{1708.08947,1701.00458}.
-Convolutional Neural Networks (CNN) have also achieved
-high accuracy in this binary classification task.
-Other studies have shown that artifacts can be detected using
-features extracted from raw images. 
-\cite{1601.06320} achieved reliable
-classification by transforming transient data from the OGLE-IV
-data-reduction pipeline and training it with machine learning
-algorithms such as Artificial Neural Networks, Support Vector
-Machines, Random Forests, Naive Bayes, K-Nearest Neighbors and Linear
-Discriminant Analysis.  
-Similarly, \cite{1501.05470} used images from Pan-STARS1 Medium Deep
-Surveys, and \cite{1407.4118} processed single-epoch multi-band images
-from the SDSS supernova survey for the same purpose.  
+Large scale automatic detection and classification of astronomical
+transients is happening within surveys such as Pan-STARRS1
+\citep{2004SPIE.5489...11K}, the Palomar Transient Factory
+\citep{2009PASP..121.1395L},  the Catalina Real-Time Transient Survey
+\citep{2009ApJ...696..870D}, the All-Sky Automated Survey for
+SuperNovae \citep{2014ApJ...788...48S} and the Zwicky Transient
+Factory \citep{2019PASP..131a8002B}.
+Besides the large amount of data, transient
+classification is hard because the data is usually heterogeneous,
+unbalanced, sparse, unevenly sampled and with missing information.   
 
+These two characteristics (size and heterogeneity) have
+motivated the application of Machine Learning (ML) algorithms to face
+this challenge.  
+For instance, Random Forests, MultiLayer Perceptron and K-Nearest
+Neighbours have been used on lightcurves to classify transients from
+the Catalina Real Time Transient Survey \citep{1601.03931};  
+convolutional neural networks have been used as 
+input to automatic vetting algorithms (quick classification of bogus
+vs. real transients) based on data from the SkyMapper Supernova and
+Transient  Survey and the High cadence Transient Survey (HiTS)
+\citep{1708.08947,1701.00458}.
 
-A complementary approach uses the lightcurves computed from the
-images to perform the classification task.
-For instance \cite{1601.03931} used classical machine learning
-algorithms such as Random Forest, MultiLayer Perceptron and K-Nearest Neighbours
-lightcurves to classify transients from the Catalina Real Time
-Transient Survey; \cite{1603.00882} used the same approach to find
-where supernovas from the Supernova Photometric Classification
-Challenge.
+% The success of these examples, and any other ML implementation,
+% depends on the quality of the training dataset.
+The quality of the dataset \textit{is a necesarry but insufficient} 
+requirement for the success of these examples and of any other ML implementation.
+New ML results usually come from groups internal to an observational
+collaboration because they have the internal know-how (and, sometimes,
+privileged access) to build training datasets.
+Consequently, despite having a lot of data available in the public domain,
+much of it is difficult to access.
+This difference in data access makes it challenging for the broader
+astronomical community to rebuild a training dataset, perform comparisons with
+published results and suggest new algorithms. 
 
-A crucial element in the developmet of any ML algorithm is the
-compilation of the training dataset. 
-In astronomy this task has been facilitated by the publication of
-large databases from different observational projects. 
-However, the publications that make use of these datasets still make
-extensive use of the internal know-how of the scientific
-collaboration. 
-It is still difficult for another scientists to rebuild a training
-dataset and perform comparisons with published results.
+Nonetheless, building traning datasets has been facilitated by the
+publication of large databases from different observational projects.
+Other collaborations have directly published large datasets of \textit{simulated transients}
+hoping to trigger more involvement from the ML in astronomy
+community at large to develop new classification algorithms \citep{2018arXiv181000001T}.
+However, at the time of writing, \textit{no dataset for transients has been made accesible 
+to the public in the form of a catalogue based on \textbf{real data}.}
 
-To address this issue we compile and publish in easy-to-access files a
-dataset that can be used to train and test different ML algorithms for
-transient detection.
+% In this paper we aim at bridging the data access gap. //problematic phrase
+To this end we compile and publish in easy-to-access files a dataset
+that can be used to train and test different ML algorithms for
+transient classification. 
 We use public data from the Catalina Real-Time Transient Survey
 (CRTS) \citep{1111.2566}, an astronomical survey searching transient
 and highly variable objects as base for the dataset.
-In this paper we present lightcurve data, in a future publication we
-will present an imaging dataset. 
+Effectively, we developed an ETL (extract, transform and load) procedure to extract
+the data from CRTS, which is designed for a esporadic lookup of a few objects, into a 
+catalogue of thousands of objects that can be used to train ML algorithms and establish benchmarks.
+Here, in the first paper, we present the lightcurve data.
+In a second paper we will present a curated imaging dataset from the same
+survey.   
 
+
+This paper is structured as follows.
 In Section \ref{sec:data} we present the CRTS and the steps we follow
 to build the dataset.
-In Section \ref{sec:repository} we describe its main features together
-with the repository structure gathering the files and some Python code  
-to explore it.
-In Section \ref{sec:ml_tests} we show how this dataset can be used to
-perform some tests using some classical ML tests follow a similar
-approach as \cite{1601.03931}.  
-We finalize in Section \ref{sec:conclusions} with a summary of main
-features of our dataset and the results of our ML tests.
+Then, in Section \ref{sec:repository} we describe its main features together
+with the repository structure gathering the files and Python code to explore it. 
+In Section \ref{sec:ml_tests} we show how this dataset can be used to 
+perform tests using ML methods following a similar approach as \cite{1601.03931},
+and the experiments that we perform. 
+We finalize in Section \ref{sec:conclusions} with a summary of the
+main features of our dataset and the results of our experiments. 
+
 
 \section{The lightcurve dataset} 
 \label{sec:data}
 
 We use public data from the Catalina Real-Time Transient Survey
 (CRTS) \citep{2009ApJ...696..870D}, an astronomical survey searching transient
-and highly variable objects.   
-CRTS covered 33000 squared degrees of sky and took data since 2007.
-Three telescopes were used: Mt. Lemmon Survey (MLS), Catalina Sky
-Survey (CSS), and Siding Spring Survey (SSS). So far, CRTS has
+and highly variable objects.
+The CRTS covered 33000 squared degrees of sky and took data since 2007. 
+Three telescopes were used: Mt. Lemmon Survey (MLS), Catalina Sky 
+Survey (CSS), and Siding Spring Survey (SSS). So far, CRTS has 
 discovered more than $15000$ transient events.
 We use data from the CSS telescope, which is an f/1.8 Schmidt
 telescope located in the Santa Catalina Mountains in Arizona.
@@ -229,11 +186,10 @@ The telescope is equipped with a 111-megapixel  detector, and covered
 4000 square degrees per night, with a limiting magnitude of 19.5 in
 the V band.  
 
-Putting together the lightcurves for ATRANCCATA implies
-cross-matching different files in the legacy CRTS webpage
-published as here:
+Putting together the lightcurves for MANTRA implies
+cross-matching different files in the legacy CRTS webpage:
 \url{http://nesssi.cacr.caltech.edu/DataRelease/CRTS-I_transients.html}. 
-The photometry is stored in two different kind of files: \verb"phot"
+The photometry is stored in two different kinds of files: \verb"phot"
 that come from the main photometry database and \verb"orphan" that
 correspond to transients not associated with the 500 million sources
 in the main photometry database.
@@ -246,40 +202,42 @@ archival webpage \url{http://nesssi.cacr.caltech.edu/catalina/All.arch.html} we 
 transient IDs and its database IDs to look for the lightcurves in the
 \texttt{phot} and \texttt{orphan} files. 
 Only 4982 transients can be linked to available data to reconstruct
-its lightcurves. 
+their lightcurves. 
 Furthermore, some of these lightcurves are duplicated, i.e. they had
-the same number of observations, MJD and magnitude measurement. 
-We drop the duplicates to end up with 4869 unique transients with an
-associated lightcurve. Figure \ref{fig:transients} shows this process. 
+the same number of observations, Modified Julian Date (MJD) and magnitude measurement. 
+We ignore the duplicates to end up with 4869 unique transients with an 
+associated lightcurve. Figure \ref{fig:transients} summarizes this process. 
 
 \begin{figure*}
-	\includegraphics[width=0.9\textwidth]{Transients.pdf}
-  \caption{ATRANCCATA Dataset Set Up: Lightcurve compilation for transients.}
+\begin{center}
+  \includegraphics[width=0.9\textwidth]{Transients.pdf}
+\end{center}
+  \caption{MANTRA Dataset Set Up: Lightcurve compilation for transient classes.}
   \label{fig:transients}
 \end{figure*} 
 
 The CRTS dataset already provides a classification. 
-The most numerous classes are: supernovae (SN),
-cataclysmic variable stars (CV), blazars, flares, asteroids, active
-galactic nuclei (AGN), and high-proper-motion stars (HPM). 
-Though most objects in the transient object catalogue belong to a single class,
-there is some uncertainty in the categorization of some of
-them. 
-In this case, an interrogation sign is used when a class is not clear
-e.g. SN? or sometimes multiple possible classes are found for a single
-event e.g. SN/CV.
-Table \ref{table:top_classes} summarizes the number of objects in
-each class. 
+The most numerous classes are: supernovae,
+cataclysmic variable stars, blazars, flares, asteroids, active
+galactic nuclei, and high-proper-motion stars (HPM). 
+Though most objects in the transient object catalogue belong to a single class, 
+there is some uncertainty in the categorization of some of them.  
+In this case, an interrogation sign is used when a class is not clear 
+e.g. SN? or sometimes multiple possible classes are found for a single 
+event e.g. SN/CV. 
+Table \ref{table:top_classes} summarizes the number of objects in each class. 
 
 To compile the non-transient lightcurves we retrieve sources in the
 dataset from the CRTS online catalogue by retrieving objects within a
 20 arcsecond radius from CRTS detected transients, 
 and removing known transient lightcurves from that set. 
-We end up with 16940 unique non-transient lightcurves. Figure \ref{fig:non-transients} shows this process. 
+We end up with 16940 unique non-transient lightcurves. Figure \ref{fig:non-transients} illustrates this process.
 
 \begin{figure*}
-	\includegraphics[width=0.7\textwidth]{NonTransients.pdf}
-  \caption{ATRANCCATA Dataset Set Up: Lightcurve compilation for non-transients.}
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{NonTransients.pdf}
+\end{center}
+  \caption{MANTRA Dataset Set Up: Lightcurve compilation for non-transients.}
   \label{fig:non-transients}
 \end{figure*} 
 
@@ -302,15 +260,16 @@ AGN? & 138 \\
 CV? & 77 \\
     \hline
 \end{tabular}
-\caption{Top 10 transient classes, with their respective number of
-  lightcurves.} 
+\caption{Top 10 transient classes in the CRTS with their respective number of lightcurves.} 
 \label{table:top_classes}
 \end{table}
 
 
 \begin{figure*}
-	\includegraphics[width=0.45\textwidth]{cumulative_magnitude.pdf}
+\begin{center}
+  \includegraphics[width=0.45\textwidth]{cumulative_magnitude.pdf}
   \includegraphics[width=0.45\textwidth]{cumulative_classes.pdf}
+\end{center}
   \caption{Cumulative number of lightcurves (expressed as a fraction)
     as a function of average magnitude (left) and number of data
     points in the lightcurve (right).
@@ -320,104 +279,144 @@ CV? & 77 \\
 \end{figure*} 
 
 
-
 \begin{figure*}
+\begin{center}
   \includegraphics[width=0.6\textwidth]{examples_transient.pdf}
-  \caption{Randomly selected lightcurves for the most represented classes as
-    compiled in the database we present in this paper.}  
+\end{center}
+  \caption{Randomly selected lightcurves for the most represented transient classes as compiled in MANTRA. The class of each sample is within the legend box. }  
   \label{fig:examples_transient}
 \end{figure*} 
 
 
 \begin{figure*}
+\begin{center}
   \includegraphics[width=0.6\textwidth]{examples_nontransient.pdf}
-  \caption{Randomly selected lightcurves for non-transient sources.}
+\end{center}
+  \caption{Randomly selected lightcurves for non-transient sources retrieved for MANTRA.}
   \label{fig:examples_non_transient}
 \end{figure*} 
 
 Figure \ref{fig:cumulative} shows the number of lightcurves as a
 function of average magnitude (left panel) and as a function of the
-number of points in the lightcurve.
-We show separately the whole data set and three representative
-classes: supernova (SN), cataclismic variables (CV) and active galactic nuclei (AGN).
-For these four sets the median magnitude is in the range $18-20$. 
+number of points in the lightcurve (right panel).
+We show separately the whole data set and three most representative
+classes: supernova, cataclysmic variables and active galactic nuclei. 
+For these four sets, the median magnitude is in the range $18-20$. 
 The number of points in the lightcurve has a larger variability.
 The median for all the curves is close to 30, while for SN, CV and
-AGN it is close to 15, 50 and 180, respectively.
+AGN it is close to 15, 50 and 180, respectively. 
+We provide sample lightcurves of the most represented transient classes 
+and non-transient sources in Figure \ref{fig:examples_transient} and Figure \ref{fig:examples_non_transient}, respectively. 
+The brightness evolution of non-transient sources is more stable over time, 
+while transient objects present non-periodical changes at different time scales. 
+
+
+The challenges in the classification of lightcurves 
+include the inherent nature of transient events, which is reflected 
+in different brightness behaviors, their evolution over time, and 
+the nonuniform sampling of observations at sequential dates. 
+Besides, there is a large class imbalance to localize transient events, 
+and perform their subsequent classification. 
+
+
+\subsection{Classification Tasks} \label{subsection_classification}
+We study two classification tasks on the MANTRA dataset: 
+
+\begin{itemize}
+\item {Binary Classification}.
+Using a balanced number of events from both classes in order 
+to investigate the capability of distinguishing between transient
+and non-transient sources.
+\item{8-Class Classification}.
+Using the unbalanced number of objects across classes to 
+perform a classification into the following categories:
+AGN, Blazar, CV, Flare, HPM, Other, SN and Non-Transient.
+\end{itemize}
+
+We evaluate both tasks using the metrics of a detection problem. 
+For each class in the testing set, we report the maximum F1-Score 
+that is defined as the harmonic mean of precision and recall. 
+We construct Precision-Recall (PR) curves by setting different 
+thresholds on the output probabilities of belonging to each class. 
+
 
 \section{Repository Description} 
 \label{sec:repository}
 
-The repository that contains the lightcurves and a jupyter notebook
+The repository contains the lightcurves and a Jupyter notebook
 to reproduce some of the Figures and Tables in this paper.
-The repository can be found in \url{https://github.com/MachineLearningUniandes/ATRANCCATA}. 
-To date the repository has three main folders.
+The repository can be found in \url{https://github.com/MachineLearningUniandes/MANTRA}. 
+To date the repository has two main folders:
 \begin{itemize}
 
 \item \texttt{data/lightcurves}: 
 contains three text files in CSV format
-the transient lightcurves (\texttt{transient\_lightcurves.csv}),
-the labels for the transients (\texttt{transient\_labels.csv}) and
+the transient lightcurves (\path{transient_lightcurves.csv}),
+the labels for the transients (\path{transient_labels.csv}) and
 the lightcurves for non-transient objects
-(\texttt{nontransient\_lightcurves.csv}). 
+(\path{nontransient_lightcurves.csv}). 
 The first two files can be linked by unique transient IDs and
 provided in the CRTS database. 
 \item \texttt{nb-explore}: includes a jupyter notebook
-  (\texttt{explore\_light\_curves.ipynb}) with examples on how to read
-  and plot transient and non-transient lightcurves (Figure
-  \ref{fig:examples_transient} and Figure
-  \ref{fig:examples_non_transient}), extract the statistic in Table
+  (\path{explore_light_curves.ipynb}) with examples on how to read
+  and plot transient and non-transient lightcurves, extract the statistics in Table
   \ref{table:top_classes} and prepare the summary statistics in Figure
   \ref{fig:cumulative}. 
-  There is some additional python files (\texttt{features.py},
-  \texttt{helpers.py} and \texttt{inputs.py}) to read and perform
+  Additional python files (\texttt{features.py},
+  \texttt{helpers.py} and \texttt{inputs.py}) allow to read and perform
   simple operations on the CSV data files. 
-\item \texttt{papers/lightcurves}: includes the source \texttt{tex} files and
-  figures for this paper. 
 \end{itemize}
 
 
 
-\section{Classical Machine Learning Tests} 
+\section{Machine Learning Methods} 
 \label{sec:ml_tests}
+Here we test baseline algorithms on the MANTRA dataset that can be
+used as a reference for future work.
+Figure \ref{fig:ML} shows an overview of our transient classification framework.
+The main steps include data processing, feature extraction and classification.  
 
-As an example on how the dataset can be used, we apply classical
-machine learning (ML) algorithms to perform different classification tasks (Figure \ref{fig:ML}).
 
+\subsection{Preprocessing and Feature Extraction}
 
-\subsection{Features}
-
-We do not feed directly the anotated lightcurves to the ML algorithms.
-We perform some preprocessing as follows.
-First, we discard lightcurves with less than 10 data points
-observations as they may not contain enough information to be
-classified correctly.
+We do not input directly the annotated lightcurves to the ML algorithms.
+We perform a preprocessing stage as follows. 
+First, we discard lightcurves with less than 10 data points observations
+as they may not contain enough information to be classified correctly.
 
 \begin{figure*}
-	\includegraphics[width=0.9\textwidth]{ML.pdf}
-  \caption{ATRANCCATA Machine Learning process.}
+\begin{center}
+  \includegraphics[width=0.9\textwidth]{ML.pdf}
+\end{center}
+  \caption{Overview of the Machine Learning process on the MANTRA
+    dataset for the binary and 8-class classification tasks. We take
+    the raw lightcurves as input, preprocess the data (step 1) and
+    balance the classes for the training phase (step 2). 
+    We extract the features (step 3) that are feed into the ML
+    algorithms that perform the classification task (step 4).}
   \label{fig:ML}
 \end{figure*} 
 
 
-Given that the number of lightcurves per class is unbalanced, 
-in order to have the same amount elements for each class we implement an
-oversampling step by artificially generating multiple mock lightcurves,
-each based on an observed one. 
-We generate a mock lightcurve from the observed lightcurve and 
+Given that the number of lightcurves per class is imbalanced, 
+in order to have the same number of instances for each class, we implement an
+oversampling step by artificially generating multiple mock lightcurves 
+from an observed one. 
+We generate a slightly different lightcurve from the observed lightcurve and 
 then sample the observed magnitude from a Gaussian distribution
 centered on the observational apparent magnitude with the magnitude's
-error as the standard deviation. 
+error as the standard deviation. It is important to note that \textit{the oversampling
+was only done on the train set. The test set was left untouched.}
 
 
-Finally, we compute a fixed set of features for each lightcurve. 
-These features are scalars derive from statistical and model-specific
+Finally, we compute a standard set of features for each lightcurve. 
+These features are scalars derived from statistical and model-specific
 fitting techniques. 
 The first features (moment-based, magnitude-based and
 percentile-based) were formally introduced in 
 \cite{1101.1959}, and have been used in other studies \citep{1603.00882,1601.03931}.  
 We extend that list to include another set (polynomial fitting-based features). 
-At the end of this process we renormalize the features to have zero
+At the end of this process we normalize the features to have zero
 mean and unit variance.  
 
 These groups of features are:
@@ -488,10 +487,10 @@ These groups of features are:
     \end{itemize}
     
   \item Polynomial Fitting-based features, which are the coefficients of
-    multi-level terms in a polynomial curve fittingpr. This is a new set
+    multi-level terms in a polynomial curve fitting. This is a new set
     of features proposed in this paper. 
-    \texttt{Polyn\_Tm} indicates the coffecient of the term of order
-    \texttt{m} in a fit to a polinomial of order \texttt{n}.
+    \texttt{Polyn\_Tm} indicates the coefficient of the term of order
+    \texttt{m} in a fit to a polynomial of order \texttt{n}.
     \begin{itemize}
         \item \texttt{Poly1\_T1}.
         \item \texttt{Poly2\_T1}.
@@ -506,218 +505,180 @@ These groups of features are:
     \end{itemize}    
 \end{enumerate}
 
-\subsection{Classification Tasks} \label{subsection_classification}
-
-We study two classification tasks.
-
-\begin{itemize}
-\item {Binary Classification}.
-Using a balanced number of events from both classes in order 
-to investigate the capability of distinguishing between Transients
-and Non-Transients.
-\item{8-Class Classification}.
-Using the unbalanced number of objects across classes to 
-perform a classification into the following categories:
-AGN, Blazar, CV, Flare, HPM, Other, Non-Transient and Supernovae.  
-\end{itemize}
 
 \subsection{ML algorithms}
 
-
 We conduct experiments with three widely used families of supervised classification 
-algorithms: Neural Networks (NNs), Random Forests (RFs) and Support
-Vector Machines (SVMs). 
+algorithms \citep{skysurvey, 1601.03931}: Neural Networks (NNs),
+Random Forests (RFs) and Support Vector Machines (SVMs).  
 
 These algorithms are popular in published studies and are efficient 
 for low dimensional feature datasets as is our case. 
-We use sklearn \citep{1201.0490} Python's implementation of these algorithms.
+We use sklearn \citep{1201.0490} Python's implementation of random
+forests and support vector machines.  
 Details on the inner workings of these machine learning models can be
-found in \cite{9780387848570}.  
-The set of hyperparameter space explored for each algorithm is the
+found in \cite{9780387848570}. 
+
+We use the pytorch library for python for the development of the
+linear Neural Networks. 
+It consists of a series of fully connected layers that map the
+features to the corresponding number of classes. At each layer, a 1d
+batch normalization is implemented followed by a relu activtion
+function. The final layer calls a softmax activation function to
+transform the numerical values to class probabilities. 
+
+The hyperparameters explored for each algorithm are the
 following. 
 
 \begin{itemize}
 \item Neural Networks:
 \begin{itemize}
-\item Learning Rate: Either constant vs. adaptive.
-\item Hidden Layer Sizes: Single Layer with $100$ nodes vs. Two layers with
-  $100$ nodes each.
-\item L2 Penalty ($\alpha$): 
-  $10^{-1}$, $10^{-2}$, $10^{-3}$ , $10^{-4}$.
-\item Activation Function: Logistic vs. Relu.
+\item Learning Rate: $\{0.1,0.01,0.001,0.0001\}$
+\item Hidden Layer Sizes: Single , double or triple layers with $500$ nodes each.
 \end{itemize}
 
 \item Random Forest:
 \begin{itemize}
     \item Number of Estimators: $200$ or $700$.
-    \item Number of features considered: Square Root or the Logarithm 
-    base 2 of the total number of features.
+    \item Number of features considered: Square root or $log_2$ of the
+      total number of features. 
 \end{itemize}
 
 \item Support Vector Machines:
 \begin{itemize}
-    \item Kernel: Radial Basis Function (RBF).
+    \item Kernels: Radial Basis Function (RBF), linear or sigmoid.
     \item Kernel Coefficient ($\gamma$):  
-      $10^{-1}$, $10^{-2}$, $10^{-3}$ , $10^{-4}$, $10^{-5}$
-    \item Error Penalty (\textit{C}): 1 vs 10 vs 100 vs 1000. 
+      $\{0.125, 2, 32\}$
+    \item Error Penalty (\textit{C}): $\{0.125, 2, 32\}$
 \end{itemize}
 \end{itemize}
 
 \subsection{Validation} \label{subsection_importances}
 
-We split the input lightcurves in a training and test datasets. 
-The test dataset contains 4869 unique transients lightcurves and , without any
-oversampling. 
-We use 2-fold cross-validation during training as evaluation
-protocol. 
-Moreover, we use grid search during training to test multiple
-hyper-parameter configurations for each one  of the possible
-algorithms. 
-We use the F1-Score to assess the performance of a given model and 
-we evaluate each task on the held-out test dataset.
+We split the input lightcurves into training and testing in a $75:25$
+ratio respectively, class by class. 
+For the random forests and the SVM, we use a grid search over the
+hyperparameter combinations with a 2-fold cross-validation over the
+training set to determine the best hyperparameters.  
+For the neural networks, at each epoch, the network is evaluated on
+the test data.  
 
-\begin{figure*}
-	\includegraphics[width=\textwidth]{binFeatImportance.pdf}
-    \caption{Feature importance rank  for the best Random Forest
-      classifier for the Binary classification task. 
-      Feature importance is represented with percentages.} 
-    \label{Importances-Binary}
-\end{figure*} 
-
-\begin{figure*}
-	\includegraphics[width=\textwidth]{8classFeatImportance.pdf}
-    \caption{Feature importance rank for the best Random Forest
-      classifier for the best 8-Class classification task. Feature
-      importance is represented with percentages.} 
-    \label{Importances-8-Class}
-\end{figure*}
 
 \subsection{Results}
+
+Table \ref{table:all-avg-results} shows the average class precision,
+recall and F1-measure for each of the classification tasks and
+algorithms liste above.  
+
+
+\begin{table}
+\centering
+% \resizebox{0.45\textwidth}{!}{%
+\begin{tabular}{ccccc}
+\hline
+\multicolumn{1}{l}{\textbf{Case}} & \textbf{Classifier} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} \\ \hline \hline
+\multirow{3}{*}{Binary}                 & RF                  & \textbf{86.61}    & \textbf{86.61} & \textbf{86.61}   \\
+                                        & SVM                 & 82.61             & 82.525          & 82.57             \\
+                                        & NN                  & 71.84              & 73.19           & 72.51             \\ \hline
+\multirow{3}{*}{8 Class}                & RF                  & \textbf{46.25}     & \textbf{63.59}  & \textbf{50.38}             \\
+                                        & SVM                 & 32.94              & 55.22           & 36.60             \\
+                                        & NN                  & 36.0     & 55.19           & 38.59   \\ \hline
+\end{tabular}%
+% }
+\caption{Average precision, recall and F1-score accross all classes
+  for each algorithm and classification task. Best results per metric
+  per classification task are in bold.} 
+\label{table:all-avg-results}
+\end{table}
+
+\begin{figure}
+\begin{center}
+  \includegraphics[width=0.5\textwidth]{normalizedCMBinary.pdf}
+\end{center}
+  \caption{Confusion Matrix for the best performing model in the
+    Binary task. Rows represent prediction and columns the ground
+    truth.} 
+  \label{fig:normalizedBinaryCM}
+\end{figure} 
+
+
+\begin{figure*}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{normalizedCM.pdf}
+\end{center}
+  \caption{Confusion Matrix for the best performing model in the 8-class
+  task. The classes follow the abbreviations in Table
+  \ref{Overall-Scores-8-Class-Regular}. Rows represent the
+  predictions, and columns the ground truth.} 
+  \label{fig:normalized8ClassCM}
+\end{figure*} 
+
+
 
 %%%%%%  BINARY  %%%%%%
 \subsubsection{Binary Classification} 
 \label{Results-Binary} 
 
+The best algorithm in this task is RFs with an average F1-Score of
+$86.61\%$.   
+SVMs are the second best-performing model with a F1-Score of $82.57\%$. 
+Changing the number of features does not significantly affect the score.
+NNs are ranked third with an F1-Score of $72.51\%$
 
-The best algorithm in this task is RFs with a maximum F1-score of
-87.69\%.   
-SVMs are the second best-performing model with the F1-score of 85.36\%. 
-Changing the number of features does not affect significantly the score.
-NNs are ranked third, although their scores are very similar to those of SVMs. 
-The highest achieved score for NNs is 85.03\%.
-
-
-Table \ref{Confusion-Binary} shows the confusion matrix of the best
-performing algorithm and Table \ref{Overall-Scores-Binary} summarizes
-the scores.
-These results imply that non-transients are better classified overall.  
-
-
-Figure \ref{Importances-Binary} displays the most important features
-for the RFs classifier.
-The top five inputs for classification are \texttt{stetson\_j},
-\texttt{std}, \texttt{mad}, \texttt{poly1\_t1} and \texttt{poly2\_t1}.  
-The first feature achieved the highest importance of 21\%, compared to
-the following with values in the range 6\% - 8\%.  
-
-
-\begin{table}
-\centering
-\begin{tabular}{|r|c|c|c|c|}
-\hline
-\multicolumn{1}{|l|}{} & Precision & Recall & f1-Score & Support \\ \hline \hline
-Non-Transient          & 94.13     & 94.13      & 94.13      & 3798   \\ \hline
-Transient              & 79.10     & 79.10      & 79.10      & 1067    \\ \hline
-\end{tabular}
-\caption{Precision, Recall and f1-score for the Binary Classification Task with Regular inputs.}
-\label{Overall-Scores-Binary}
-\end{table}
-
-\begin{table}
-\centering
-\begin{tabular}{|r|c|c|}
-\hline
-\multicolumn{1}{|l|}{} & non-transient    & transient   \\ \hline \hline
-non-transient                & 3575       & 223    \\ \hline
-transient                    & 223       & 844   \\ \hline
-\end{tabular}
-\caption{Confusion Matrix for the best performing model in the Binary task.}
-\label{Confusion-Binary}
-\end{table}
-
+Figure \ref{fig:normalizedBinaryCM} shows the confusion matrix of the best
+performing algorithm. These results suggest that in an imbalanced set
+up, non-transient sources are better classified while transients are
+more difficult, showing a difference of about  15 points in the
+percentage of correct classifications.  
+This difference in performance could be attributed to the intra-class
+variation within the transients.
 
 
 %%%%%%  EIGHT-CLASS  %%%%%%
 \subsubsection{Eight-Class Classification}
 
+For this task, RF is again the best classifier.
+The best F1-Score is $50.38\%$. 
+NNs are the second best model with an F1-Score is $36.60\%$, while
+SVMs are the worst-performing model only achieving an average F1-Score
+of $38.59\%$.   
+Table \ref{Overall-Scores-8-Class-Regular} summarizes the results for 
+individual classes and Figure  \ref{fig:normalized8ClassCM} presents 
+the confusion matrix for the RF.
 
-For this task RFs are againt the best classifier.  
-The best f1-score is 66.05\%. 
-NNs are the second best. 
-Its highest f1-score is 60.19\%, while SVMs are the worst-performing
-model only achieving a maximum f1-score of 57.30\%.
-Table \ref{Overall-Scores-8-Class-Regular} summarizes the results
-and Table \ref{Confusion-8-Class} presents the confusion matrix for the RF.
-
-The two classes with highest recall are HPM and Non-Transient, with a
-recall of 86.36\% and 84.13\%, respectively. 
-The worst performing classes are Blazar, Flare and Other, with recall
-values in the range 36\% - 40\%. 
-SN is the class with which most other class instances are
-incorrectly classified. 
-Moreover, Flares have about 50\% of the test samples classified as
-Non-Transients, AGNs have about 20\% of their 
-samples classified as Other, and Blazars and Other had most of  its
-samples classified as AGN. 
-Additionally, most incorrectly classified AGNs ($\sim$20.5\%) are
-identified as Other and most Blazar instances are
-incorrectly categorized as either SN or AGN. 
-
-Figure \ref{Importances-8-Class} displays the feature importance ranking.
-This list ranks first \texttt{stetson\_j} with an 8\% importance,
-followed by \texttt{amp}, \texttt{sk}, \texttt{std}, \texttt{mad},
-with values around 6\%.  
-
+The two classes with highest F1-Score are non-transient ($87.12\%$) and
+CV ($68.77\%$).  
+The recall decreases for the non-transient class in comparison to the binary experiment, 
+meaning that the algorithm misclassified some instances that belong to non-transient class
+among transient classes. 
+However, transient sources are not commonly confused with non-transient ones. 
+The worst performing classes are Flare, Other and HPM, with F1-Scores in the 
+range 11\% - 40\%. 
+It is worth noting that the less frequent classes present a lower performance, 
+such as Flare and HPM. 
+Even though the most frequent classes are more easily identified, 
+the "other" type class has a low F1-score due to the diverse nature 
+of sources assigned to this category. 
 
 \begin{table}
 \centering
-\begin{tabular}{|r|c|c|c|c|}
+% \resizebox{\textwidth}{!}{%
+\begin{tabular}{ccccc}
 \hline
-\multicolumn{1}{|l|}{} & Precision & Recall & f1-Score & Support \\ \hline \hline
-SN            &   48.82 &   51.39  &  50.07  &  323 \\ \hline
-CV            &   66.96 &   70.69  &  68.77  &  215 \\ \hline
-AGN           &   48.14 &   85.84  &  61.69  &  106 \\ \hline
-HPM           &   25.19 &   86.84  &  39.05  &   76 \\ \hline
-Blazar       &   46.77 &   49.15  &  47.93  &   59 \\ \hline
-Flare       &    7.00 &   41.17  &  11.96  &   51 \\ \hline
-Other         &   31.11 &   44.01  &  36.46  &  234 \\ \hline
-Non-Transient &   96.06 &   79.69  &  87.12  & 3798 \\ \hline
-avg/total     &   46.25 &   63.59  &  50.38  & 4862 \\ \hline
-\end{tabular}
-\caption{Precision, Recall and f1-score for the 8-Class Classification Task with Regular inputs.}
+\textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score}& \textbf{Cover} \\\hline \hline
+SN             & 48.82	& 51.39 &	50.07	 & 323 \\\hline
+CV             & 66.96	& 70.69 &	68.77	 & 215 \\\hline
+AGN            & 48.14	& 85.84 &	61.69	 & 106 \\\hline
+HPM            & 25.19	& 86.84 &	39.05	 & 76 \\\hline
+Blazar         & 46.77	& 49.15 &	47.93	 & 59 \\\hline
+Flare          & 7.00	& 41.17 &	11.96	 & 51 \\\hline
+Other          & 31.11	& 44.01 &	36.46	 & 234 \\\hline
+Non-Tr.        & 96.06	& 79.69 &	87.12	 & 3798 \\\hline
+avg/total      & 46.25	& 63.60 &	50.38	 & 4862 \\\hline
+\end{tabular}%
+\caption{Precision, Recall and F1-Score for the 8-Class Classification Task.}
 \label{Overall-Scores-8-Class-Regular}
-\end{table}
-
-\begin{table}
-\centering
-\begin{tabular}{|r|c|c|c|c|c|c|c|c|}
-\hline
-\multicolumn{1}{|l|}{} & \rotatebox{90}{SN}    & \rotatebox{90}{CV}
-& \rotatebox{90}{AGN}   & \rotatebox{90}{HPM}    &
-\rotatebox{90}{Blazar}  & \rotatebox{90}{Flare}  &
-\rotatebox{90}{Other}   & \rotatebox{90}{Non-Transient}  \\ \hline \hline
-SN            & 166  &  25  &  0  &  0  &  7   &  5  &  40 &   97 \\ \hline
-CV            &  17  & 152  &  0  &  1  &  5   &  3  &  12 &   37 \\ \hline
-AGN           &   1  &   2  & 91  &  0  & 10   &  1  &  35 &   49 \\ \hline
-HPM           &   5  &   0  &  0  & 66  &  0   &  0  &   5 &  186 \\ \hline
-Blazar       &   8  &  13  &  4  &  0  & 29   &  0  &   6 &    2 \\ \hline
-Flare        &  16  &   5  &  0  &  0  &  3   & 21  &   4 &  251 \\ \hline
-Other        &  53  &  12  &  7  &  1  &  3   &  3  & 103 &  149 \\ \hline
-Non-Tr. &  57  &   6  &  4  &  8  &  2   & 18  &  29 & 3027 \\ \hline
-\end{tabular}
-\caption{Confusion Matrix for the best performing model in the 8-Class
-  task. The classes follow the abbreviations in Table \ref{Overall-Scores-8-Class-Regular}}
-\label{Confusion-8-Class}
+% }
 \end{table}
 
 
@@ -725,35 +686,49 @@ Non-Tr. &  57  &   6  &  4  &  8  &  2   & 18  &  29 & 3027 \\ \hline
 \section{Conclusions}
 \label{sec:conclusions}
 
-The scope of forthcoming of large astronomical synoptic surveys 
+The scope of forthcoming large astronomical synoptic surveys 
 motivates the development and exploration of automatized ways to
 detect transient sources. 
-In turn this prompts the compilation of publicly available databases
-to train and test new algorithms. 
-In this paper we presented the results of such compilation based on data
-from the Catalina Real-Time Transient Suvey (CRTS).
-The data-set compiles  $4869$ transient and $16940$ non-transient
+Such developments require observational datasets to train and test new
+algorithms.  
+Making these datasets public and easy to access has the potential
+to open the field to a larger number of contributors.
+With these goals in mind, in this paper we presented a compilation
+based on data from the Catalina Real-Time Transient Survey.
+The dataset has  $4869$ transient and $16940$ non-transient
 lightcurves. 
 The dataset is publicly available at
-\url{https://github.com/MachineLearningUniandes/ATRANCCATA}.   
+\url{https://github.com/MachineLearningUniandes/MANTRA}.   
 
 We illustrated how to use this database by extracting 
-characteristic features to use them as inputs to train three different
+characteristic features to use them as input to train three different
 machine learning algorithms (Random Forests, Neural Networks and
 Support Vector Machines) for classification tasks.
 The features extracted from lightcurves were either statistical
 descriptors of the observations, or polynomial curve fitting
 coefficients applied to the lightcurves.   
-Overall the best classifier for all tasks was the Random Forest.
-In this model the most important feature was always
-\texttt{stetson$\_$j}, i.e. a robust estimate for the standard
-deviation. 
+Overall, the best classifier for all tasks was the Random Forest.
+Neural Networks showed the worst performance in the binary
+classification task and the second best in the 8-class classification
+task. 
 
-In a second paper we will present another reference dataset for
-astronomical transient event recognition based on images of the
-CRTS.
-The corresponding tests will use  state-of-the art deep learning
-techniques for transient classification. 
+Certainly other classification algorithms could be used on the MANTRA
+lightcurves. Our purpose here is not a thorough analysis of machine
+learning algorithms. Our focus is in the compilation of the data into
+a format that could easily be used for different projects that could
+be addressed with MANTRA. 
+For instance the supernovae detection problem could be studied as a
+classfication problem between SN and the other classes, including
+non-transients. 
+Considering extremely unbalanced classes could also be addressed
+with the dataset we are presenting by simply using less samples for
+the SN class and keeping a large numbers for the non-transient class.  
+
+
+In a second paper we will present the second part of MANTRA.
+It corresponds to almost one million images from the CRTS.
+These will be tested using state-of-the art deep learning techniques
+for transient classification.  
 
 \section*{Acknowledgements}
 
@@ -770,7 +745,7 @@ AST-1518308.  The CSS survey is funded by the National Aeronautics
 and Space Administration under Grant No. NNG05GF22G issued through
 the Science Mission Directorate Near-Earth Objects Observations Program.
 
-\bibliographystyle{mnras}
+\bibliographystyle{aasjournal}
 \bibliography{bibliography}
 
 \end{document}
