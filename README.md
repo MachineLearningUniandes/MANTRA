@@ -5,7 +5,7 @@ Annotated dataset of more than 10000 transient and non-transient object light-cu
 
 ## Cite
 
-Please cite our paper if you use this code in your own work:
+Please cite our paper if you use MANTRA in your own work:
 
 ```
 @article{neira2020mantra,
